@@ -23,7 +23,7 @@ buildscript {
     ]
 
     ext.names = [
-            applicationId: "com.taverapp.kyrgyzbilim"
+            applicationId: "com.kyrgyzbilim"
     ]
 //    ext.kotlin_version = "1.4.21"
     repositories {
