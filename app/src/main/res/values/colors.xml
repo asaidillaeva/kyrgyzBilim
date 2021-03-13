@@ -13,4 +13,7 @@
     <color name="darkMain">#4BACB8</color>
     <color name="progressBar">#0F6671</color>
     <color name="darkBarMain">#4B8D95</color>
+
+    <color name="textColorPrimary">#928C8C</color>
+
 </resources>
