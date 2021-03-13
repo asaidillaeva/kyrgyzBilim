@@ -16,4 +16,6 @@
 
     <color name="textColorPrimary">#928C8C</color>
 
+    <color name="backgraungDefault">#f0f0f0</color>
+
 </resources>
