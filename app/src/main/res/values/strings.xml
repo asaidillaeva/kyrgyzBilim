@@ -11,4 +11,6 @@
     <string name="last_name">Last Name</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="sign_in">Sign In</string>
+    <string name="grammar_example">а, ы, о, у, ү, ө ,и ,э(е)</string>
+    <string name="grammar_explanation">Кыска үндүүлөр:</string>
 </resources>

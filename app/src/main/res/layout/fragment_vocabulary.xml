@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/backgraungDefault"
-    tools:context=".ui.themesSection.vocabulary.VocabularyFragment">
+    tools:context=".ui.themesSection.vocabulary.VocabularyFragment"
+    android:orientation="vertical">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
+        android:layout_marginStart="19dp"
         android:layout_marginTop="17dp"
         android:fontFamily="sans-serif-medium"
         android:text="Vocabulary"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/vocabularyTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="САЛАМ, АТЫӉ КИМ?"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+    <TextView
+        android:id="@+id/vocabularyThemeEn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Hi, What is your name?"
+        android:textColor="@color/darkMain"
+        android:textSize="16sp" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="9dp"
         android:layout_marginStart="14dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         tools:listitem="@layout/item_dialog"/>
 
-</FrameLayout>
+</LinearLayout>

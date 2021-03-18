@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="САЛАМ, АТЫӉ КИМ?"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textTitleEn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Hi, What is your name?"
+        android:textColor="@color/darkMain"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Сабакка чыгып жатканда алгач китеп кабыңызды текшериңиз. Китеп кабыңызга китеп, дептер, калем сап, телефон жана ачкычтарды салыңыз. Эң башкысы капчыгыңызды унутпаңыз, анткени сизге керектүү акча каражатыңыз ал жерде сакталуу жана автобуска жол кире төлөйсүз. "
+        android:textSize="15sp"
+        android:lineSpacingExtra="0.05dp"
+        android:textColor="@color/black"/>
+</LinearLayout>
