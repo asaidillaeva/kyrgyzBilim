@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/backgraungDefault"
-    tools:context=".ui.themesSection.vocabulary.VocabularyFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.themesSection.vocabulary.VocabularyFragment">
 
 
     <TextView
@@ -29,6 +29,7 @@
         android:text="САЛАМ, АТЫӉ КИМ?"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
     <TextView
         android:id="@+id/vocabularyThemeEn"
         android:layout_width="match_parent"
@@ -40,11 +41,11 @@
         android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="9dp"
-        android:layout_marginStart="14dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        tools:listitem="@layout/item_dialog"/>
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="9dp"
+        tools:listitem="@layout/item_dialog" />
 
 </LinearLayout>

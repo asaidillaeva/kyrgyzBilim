@@ -31,28 +31,31 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/dialogTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="17dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Саламдашуу/"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="17dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Саламдашуу/"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/dialogTitleEn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
+                android:layout_toEndOf="@id/dialogTitle"
                 android:fontFamily="sans-serif-medium"
                 android:text="Greetings"
-                android:layout_toEndOf="@id/dialogTitle"
                 android:textColor="@color/darkMain"
                 android:textSize="16sp" />
 
         </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerDialog"
             android:layout_width="wrap_content"
