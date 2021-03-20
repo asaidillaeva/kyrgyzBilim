@@ -10,6 +10,7 @@
 
     <color name="mainColor">#60A5AE</color>
     <color name="darkWhite">#D9D9D9</color>
+    <color name="sectionBackground">#E8E8E8</color>
     <color name="darkMain">#4BACB8</color>
     <color name="progressBar">#0F6671</color>
     <color name="darkBarMain">#4B8D95</color>

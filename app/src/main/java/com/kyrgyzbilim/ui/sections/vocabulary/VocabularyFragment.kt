@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.ui.themesSection.vocabulary
+package com.kyrgyzbilim.ui.sections.vocabulary
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

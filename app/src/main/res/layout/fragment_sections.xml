@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.themesList.ThemesFragment">
+    android:background="@color/darkWhite"
+    tools:context=".ui.sections.SectionsFragment">
+
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
@@ -22,25 +25,26 @@
                 android:src="@drawable/ic_back" />
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:letterSpacing="0.04"
-                android:text="Themes"
+                android:text="Greetings"
                 android:textAllCaps="true"
                 android:textColor="@color/darkWhite"
                 android:textSize="18sp" />
         </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerThemes"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_themes" />
-
-</LinearLayout>
+        tools:listitem="@layout/item_sections"/>
+</RelativeLayout>
