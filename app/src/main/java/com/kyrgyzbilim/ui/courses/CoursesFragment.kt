@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.Course
 import com.kyrgyzbilim.ui.adapters.CoursesAdapter
+import com.kyrgyzbilim.ui.sections.SectionsFragment
 import kotlinx.android.synthetic.main.fragment_courses.*
 
 
 class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
     private lateinit var adapter: CoursesAdapter
+
+
 
 //    private val mainViewModel: CourseViewModel by viewModels {
 //        InjectorObject.getMainViewModelFactory()
@@ -61,6 +65,18 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
         val current = adapter.getItemId(position)
 
-        //TODO: open ThemesFragment
+        val sectionsFragment: Fragment =  SectionsFragment()
+         val fragmentManager: FragmentManager? = activity?.supportFragmentManager
+
+
+        fragmentManager?.beginTransaction()
+            ?.add(android.R.id.content, sectionsFragment)
+            ?.addToBackStack(null)
+            ?.commit()
+
+
+
     }
+
+
 }
