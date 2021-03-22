@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.Course
+import com.kyrgyzbilim.data.course.Course
 import kotlinx.android.synthetic.main.item_courses.view.*
 
 class CoursesAdapter(
         private val onClickListener: CoursesClickListener
 ) : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF) {
-
 
 
     companion object{

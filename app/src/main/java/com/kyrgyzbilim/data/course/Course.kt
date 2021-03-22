@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.data
+package com.kyrgyzbilim.data.course
 
 class Course(
         val id: Int,

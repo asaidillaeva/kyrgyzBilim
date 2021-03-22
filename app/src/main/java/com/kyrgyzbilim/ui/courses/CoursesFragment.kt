@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.viewModels
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.base.InjectorObject
-import com.kyrgyzbilim.data.Course
+import com.kyrgyzbilim.data.course.Course
 import com.kyrgyzbilim.ui.adapters.CoursesAdapter
 import com.kyrgyzbilim.ui.sections.SectionsFragment
 import kotlinx.android.synthetic.main.fragment_courses.*

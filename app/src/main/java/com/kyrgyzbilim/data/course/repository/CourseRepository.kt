@@ -1,6 +1,4 @@
-package com.kyrgyzbilim.data.repository
-
-import com.kyrgyzbilim.data.Course
+package com.kyrgyzbilim.data.course.repository
 
 class CourseRepository {
 
