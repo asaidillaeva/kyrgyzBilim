@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkWhite"
     android:orientation="vertical"
-    tools:context=".ui.sections.SectionsFragment">
+    tools:context=".ui.courses.sections.SectionsFragment">
 
 
     <com.google.android.material.appbar.AppBarLayout

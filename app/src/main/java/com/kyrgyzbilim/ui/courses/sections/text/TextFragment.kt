@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.ui.sections.text
+package com.kyrgyzbilim.ui.courses.sections.text
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

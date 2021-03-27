@@ -22,14 +22,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/sectionBackground"
             android:orientation="vertical">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_background"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <ImageView

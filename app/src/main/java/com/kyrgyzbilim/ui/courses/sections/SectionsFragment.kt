@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.ui.sections
+package com.kyrgyzbilim.ui.courses.sections
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,17 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.sections.Section
-import com.kyrgyzbilim.ui.adapters.CoursesAdapter
+import com.kyrgyzbilim.data.themes.Theme
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
+import com.kyrgyzbilim.ui.adapters.ThemesAdapter
 import kotlinx.android.synthetic.main.fragment_sections.*
 import kotlinx.android.synthetic.main.item_sections.*
 
-class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener {
+class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, ThemesAdapter.ThemesOnClickListener {
 
-    private lateinit var adapter: SectionAdapter
+    private lateinit var sectionAdapter: SectionAdapter
+    private lateinit var themesAdapter: ThemesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +30,25 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = SectionAdapter(this)
+        sectionAdapter = SectionAdapter(this,this)
+        themesAdapter = ThemesAdapter(this)
 
-        loadData()
+        loadSectionData()
     }
 
-    private fun loadData() {
+    private fun loadThemesData() {
+        val themes = Theme(1,"Greeting", 120)
+        val themes1 = Theme(2,"Items", 10)
+        val themes2 = Theme(3,"One My Day", 145)
+        val themes3 = Theme(4,"My Profession", 112)
+
+        val themesList = arrayListOf(themes,themes1, themes2, themes3)
+
+        themes_RV?.adapter = themesAdapter
+        themesAdapter.submitList(themesList)
+    }
+
+    private fun loadSectionData() {
 
         val section = Section(1,"Dialog", 1)
         val section2 = Section(2,"Vocabulary", 1)
@@ -43,14 +57,20 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener {
 
         val sectionsList = arrayListOf(section, section2, section3,section4)
 
-        recyclerSection.adapter = adapter
-        adapter.submitList(sectionsList)
+        recyclerSection.adapter = sectionAdapter
+        sectionAdapter.submitList(sectionsList)
 
     }
 
     @SuppressLint("ResourceAsColor")
     override fun onClickSection(position: Int) {
-        val current = adapter.getItemId(position)
+        val current = sectionAdapter.getItemId(position)
+        loadThemesData()
+
+
+//        section_item_card.setCardBackgroundColor(Color.parseColor("#b70505"))
+//        section_item_card.setCardBackgroundColor(R.color.mainColor)
+//        Log.e("clicked",current.toString())
 
 //        if (themes_RV.visibility == View.GONE){
 //            themes_RV.visibility = View.VISIBLE
@@ -61,6 +81,10 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener {
 //            section_item_card.setCardBackgroundColor(R.color.white)
 //
 //        }
+
+    }
+
+    override fun onClickTheme(position: Int) {
 
     }
 }

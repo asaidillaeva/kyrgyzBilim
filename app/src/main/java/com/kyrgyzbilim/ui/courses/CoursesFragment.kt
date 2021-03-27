@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.courses
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.fragment.app.FragmentManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.course.Course
 import com.kyrgyzbilim.ui.adapters.CoursesAdapter
-import com.kyrgyzbilim.ui.sections.SectionsFragment
+import com.kyrgyzbilim.ui.courses.sections.SectionsFragment
 import kotlinx.android.synthetic.main.fragment_courses.*
 
 
@@ -60,6 +61,8 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
     override fun onClickCourse(position: Int) {
 
+        Log.e("clicked","click")
+
         val current = adapter.getItemId(position)
 
         val sectionsFragment: Fragment =  SectionsFragment()
@@ -70,6 +73,7 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
             ?.add(android.R.id.content, sectionsFragment)
             ?.addToBackStack(null)
             ?.commit()
+
 
 
 
