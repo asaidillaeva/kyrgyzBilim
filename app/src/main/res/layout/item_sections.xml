@@ -50,7 +50,7 @@
                     android:layout_marginStart="120dp"
                     android:text="@string/dialog"
                     android:textAllCaps="true"
-                    android:textColor="@color/black"
+                    android:textColor="@color/darkMain"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/section_image"
@@ -68,6 +68,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/section_title"
+                android:paddingBottom="5dp"
                 tools:listitem="@layout/item_themes">
 
             </androidx.recyclerview.widget.RecyclerView>

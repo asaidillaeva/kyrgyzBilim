@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.sections.Section
 import com.kyrgyzbilim.data.themes.Theme
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
 import com.kyrgyzbilim.ui.adapters.ThemesAdapter
+import com.kyrgyzbilim.ui.courses.sections.themes.ThemesFragment
 import kotlinx.android.synthetic.main.fragment_sections.*
 import kotlinx.android.synthetic.main.item_sections.*
 
@@ -32,21 +34,17 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, Themes
 
         sectionAdapter = SectionAdapter(this,this)
         themesAdapter = ThemesAdapter(this)
+        initViews()
 
         loadSectionData()
     }
 
-    private fun loadThemesData() {
-        val themes = Theme(1,"Greeting", 120)
-        val themes1 = Theme(2,"Items", 10)
-        val themes2 = Theme(3,"One My Day", 145)
-        val themes3 = Theme(4,"My Profession", 112)
-
-        val themesList = arrayListOf(themes,themes1, themes2, themes3)
-
-        themes_RV?.adapter = themesAdapter
-        themesAdapter.submitList(themesList)
+    private fun initViews() {
+        go_back.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack();
+        }
     }
+
 
     private fun loadSectionData() {
 
@@ -65,7 +63,9 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, Themes
     @SuppressLint("ResourceAsColor")
     override fun onClickSection(position: Int) {
         val current = sectionAdapter.getItemId(position)
-        loadThemesData()
+
+
+//        loadThemesData()
 
 
 //        section_item_card.setCardBackgroundColor(Color.parseColor("#b70505"))
@@ -85,6 +85,19 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, Themes
     }
 
     override fun onClickTheme(position: Int) {
+        val current = themesAdapter.getItemId(position)
+
+//        val themesFragment: Fragment =  ThemesFragment()
+//        val fragmentManager: FragmentManager? = activity?.supportFragmentManager
+//
+//
+//        fragmentManager?.beginTransaction()
+//            ?.add(android.R.id.content, themesFragment)
+//            ?.addToBackStack(null)
+//            ?.commit()
+
+
+
 
     }
 }

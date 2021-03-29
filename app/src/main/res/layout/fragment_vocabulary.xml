@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/backgraungDefault"
     android:orientation="vertical"
-    tools:context=".ui.courses.sections.vocabulary.VocabularyFragment">
+    tools:context=".ui.courses.sections.themes.vocabulary.VocabularyFragment">
 
 
     <TextView

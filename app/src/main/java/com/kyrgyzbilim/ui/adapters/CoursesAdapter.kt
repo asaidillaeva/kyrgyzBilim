@@ -52,8 +52,8 @@ class CoursesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         return CourseViewHolder(LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.item_courses, parent, false))
+            .from(parent.context)
+            .inflate(R.layout.item_courses, parent, false))
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {

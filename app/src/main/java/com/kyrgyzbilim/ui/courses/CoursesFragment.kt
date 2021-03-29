@@ -66,7 +66,7 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
         val current = adapter.getItemId(position)
 
         val sectionsFragment: Fragment =  SectionsFragment()
-         val fragmentManager: FragmentManager? = activity?.supportFragmentManager
+        val fragmentManager: FragmentManager? = activity?.supportFragmentManager
 
 
         fragmentManager?.beginTransaction()
