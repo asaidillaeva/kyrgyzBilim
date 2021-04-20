@@ -2,7 +2,7 @@ package com.kyrgyzbilim.data.course
 
 class Course(
         val id: Int,
-        val levelTitle: String,
+        val name: String,
         val description: String,
         val progress : Int
 

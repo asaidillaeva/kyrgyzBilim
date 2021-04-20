@@ -1,6 +1,6 @@
 package com.kyrgyzbilim.data.themes
 
-data class SubTopic(
+data class gitSubTopic(
     val id: Int = 0,
     val text: String = "",
     val translatedText: String = "",
