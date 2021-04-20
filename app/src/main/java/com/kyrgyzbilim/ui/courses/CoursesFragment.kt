@@ -1,7 +1,6 @@
 package com.kyrgyzbilim.ui.courses
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +17,9 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
     private lateinit var adapter: CoursesAdapter
 
-
-
 //    private val mainViewModel: CourseViewModel by viewModels {
 //        InjectorObject.getMainViewModelFactory()
 //    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,43 +37,30 @@ class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
         loadData()
 
-
-
     }
 
     private fun loadData() {
 //        val course = сourseViewModel.getCourse()
-        val course  = Course(1,"Beginner","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course1  = Course(2,"Elementary","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course2  = Course(3,"Pre-intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course3  = Course(4,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course4  = Course(5,"Upper-intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course5  = Course(6,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course6  = Course(7,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val courseFakeList = arrayListOf(course, course1, course2, course3, course4, course5, course6)
+        val courseFakeList = arrayListOf(
+            Course(1,"Beginner","When an application component starts and the application does not have any other components running, the Android system", 20),
+            Course(2,"Elementary","When an application component starts and the application does not have any other components running, the Android system", 20)
+        )
         recyclerCourse.adapter = adapter
         adapter.submitList(courseFakeList)
     }
 
     override fun onClickCourse(position: Int) {
 
-        Log.e("clicked","click")
-
         val current = adapter.getItemId(position)
 
         val sectionsFragment: Fragment =  SectionsFragment()
-        val fragmentManager: FragmentManager? = activity?.supportFragmentManager
 
-
-        fragmentManager?.beginTransaction()
-            ?.add(android.R.id.content, sectionsFragment)
-            ?.addToBackStack(null)
-            ?.commit()
-
-
-
-
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.beginTransaction()
+            .setCustomAnimations(R.animator.slide_in_left,
+                R.animator.slide_out_right, 0, 0)
+            .replace(R.id.fragment_home, sectionsFragment)
+            .addToBackStack(null)
+            .commit()
     }
-
-
 }

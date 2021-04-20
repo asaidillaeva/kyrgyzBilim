@@ -24,7 +24,6 @@ class CoursesAdapter(
             override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 
@@ -40,10 +39,7 @@ class CoursesAdapter(
             itemView.setOnClickListener {
                 onClickListener.onClickCourse(position)
             }
-
-
         }
-
     }
 
     interface CoursesClickListener{
