@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.courses.sections.themes.dialog.DialogFragment">
-
+    tools:context=".ui.courses.sections.themes.dialog.DialogFragmentK">
 
     <TextView
         android:layout_width="match_parent"

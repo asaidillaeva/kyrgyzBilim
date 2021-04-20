@@ -2,21 +2,25 @@ package com.kyrgyzbilim.ui.courses.sections
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.kyrgyzbilim.MainActivity
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.sections.Section
-import com.kyrgyzbilim.data.themes.Theme
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
 import com.kyrgyzbilim.ui.adapters.ThemesAdapter
 import com.kyrgyzbilim.ui.courses.sections.themes.ThemesFragment
+import com.kyrgyzbilim.ui.courses.sections.themes.dialog.DialogFragmentK
+import com.kyrgyzbilim.ui.courses.sections.themes.text.TextFragment
 import kotlinx.android.synthetic.main.fragment_sections.*
-import kotlinx.android.synthetic.main.item_sections.*
 
-class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, ThemesAdapter.ThemesOnClickListener {
+class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
+    ThemesAdapter.ThemesOnClickListener{
 
     private lateinit var sectionAdapter: SectionAdapter
     private lateinit var themesAdapter: ThemesAdapter
@@ -44,7 +48,6 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, Themes
             activity?.supportFragmentManager?.popBackStack();
         }
     }
-
 
     private fun loadSectionData() {
 
@@ -86,18 +89,13 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener, Themes
 
     override fun onClickTheme(position: Int) {
         val current = themesAdapter.getItemId(position)
+        Log.d("me", "theme clicked")
 
-//        val themesFragment: Fragment =  ThemesFragment()
-//        val fragmentManager: FragmentManager? = activity?.supportFragmentManager
-//
-//
-//        fragmentManager?.beginTransaction()
-//            ?.add(android.R.id.content, themesFragment)
-//            ?.addToBackStack(null)
-//            ?.commit()
-
-
-
-
+        requireActivity().supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.animator.slide_in_left,
+                R.animator.slide_out_right, 0, 0)
+            .replace(R.id.fragment_home, DialogFragmentK())
+            .addToBackStack(null)
+            .commit()
     }
 }

@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,27 +8,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.themes.Theme
+import com.kyrgyzbilim.data.themes.Topic
 import kotlinx.android.synthetic.main.item_sections.view.*
 import kotlinx.android.synthetic.main.item_themes.view.*
-import java.text.FieldPosition
 
 
 class ThemesAdapter(
     val onClickListener: ThemesOnClickListener
-) : ListAdapter<Theme, ThemesAdapter.ThemeViewHolder>(DIFF) {
+) : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
 
     companion object{
-        val DIFF  = object: DiffUtil.ItemCallback<Theme>(){
-            override fun areItemsTheSame(oldItem: Theme, newItem: Theme): Boolean {
+        val DIFF  = object: DiffUtil.ItemCallback<Topic>(){
+            override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Theme, newItem: Theme): Boolean {
+            @SuppressLint("DiffUtilEquals")
+            override fun areContentsTheSame(oldItem: Topic, newItem: Topic): Boolean {
                 return oldItem == newItem
-
             }
-
         }
     }
 
@@ -37,7 +36,7 @@ class ThemesAdapter(
 
             val themesRV = itemView.themes_RV
 
-            itemView.theme_title.text = currentTheme.title
+            itemView.theme_title.text = currentTheme.name
             itemView.amount_of_words.text = currentTheme.amountOfWords.toString()
 
             itemView.setOnClickListener{
