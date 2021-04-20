@@ -67,9 +67,7 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
     override fun onClickSection(position: Int) {
         val current = sectionAdapter.getItemId(position)
 
-
 //        loadThemesData()
-
 
 //        section_item_card.setCardBackgroundColor(Color.parseColor("#b70505"))
 //        section_item_card.setCardBackgroundColor(R.color.mainColor)
