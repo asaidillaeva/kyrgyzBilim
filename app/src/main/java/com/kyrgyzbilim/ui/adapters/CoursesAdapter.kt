@@ -32,7 +32,7 @@ class CoursesAdapter(
         fun onBind(position: Int) {
             val currentCourse = getItem(position)
 
-            itemView.level_title.text = currentCourse.levelTitle
+            itemView.level_title.text = currentCourse.name
             itemView.course_description.text = currentCourse.description
             itemView.percent_progress.text = currentCourse.progress.toString() + "%"
 
