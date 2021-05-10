@@ -1,6 +1,9 @@
 package com.kyrgyzbilim.data.course.repository
 
-class CourseRepository {
-//    suspend fun getCourses(courseId: Int): ApiResult<Course>
+import com.kyrgyzbilim.base.ApiResult
+import com.kyrgyzbilim.data.course.Course
+
+interface CourseRepository {
+    suspend fun getCourseList(): ApiResult<List<Course>>
 
 }

@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import com.kyrgyzbilim.MainActivity
 import com.kyrgyzbilim.R
+import com.kyrgyzbilim.base.ApiResult
+import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.sections.Section
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
 import com.kyrgyzbilim.ui.adapters.ThemesAdapter
+import com.kyrgyzbilim.ui.courses.CourseViewModel
 import com.kyrgyzbilim.ui.courses.sections.themes.ThemesFragment
 import com.kyrgyzbilim.ui.courses.sections.themes.dialog.DialogFragmentK
 import com.kyrgyzbilim.ui.courses.sections.themes.text.TextFragment
@@ -25,22 +29,52 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
     private lateinit var sectionAdapter: SectionAdapter
     private lateinit var themesAdapter: ThemesAdapter
 
+    private val sectionViewModel: SectionViewModel by viewModels {
+        InjectorObject.getSectionViewModelFactory()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sections, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sectionViewModel.section.observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    progress_bar.visibility = View.GONE
+                    recyclerSection.visibility = View.VISIBLE
+                    initList(it.data)
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("Course Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    progress_bar.visibility = View.VISIBLE
+                    recyclerSection.visibility = View.GONE
+                }
+            }
+
+        }
+
+
+    }
+
+    private fun initList(sections: List<Section>){
+
         sectionAdapter = SectionAdapter(this,this)
         themesAdapter = ThemesAdapter(this)
         initViews()
 
-        loadSectionData()
+        recyclerSection.adapter = sectionAdapter
+        sectionAdapter.submitList(sections)
+
+//        loadSectionData()
     }
 
     private fun initViews() {
@@ -58,8 +92,7 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
 
         val sectionsList = arrayListOf(section, section2, section3,section4)
 
-        recyclerSection.adapter = sectionAdapter
-        sectionAdapter.submitList(sectionsList)
+
 
     }
 

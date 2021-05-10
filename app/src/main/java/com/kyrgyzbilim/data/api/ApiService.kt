@@ -1,8 +1,11 @@
 package com.kyrgyzbilim.data.api
 
-import com.kyrgyzbilim.data.api.models.*
 import com.kyrgyzbilim.data.course.Course
+import com.kyrgyzbilim.data.remote.models.*
 import com.kyrgyzbilim.data.themes.Topic
+import com.kyrgyzbilim.data.user.LoginRequestBody
+import com.kyrgyzbilim.data.user.LoginResponse
+import com.kyrgyzbilim.data.user.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.*
 

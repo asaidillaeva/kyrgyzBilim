@@ -1,66 +1,88 @@
 package com.kyrgyzbilim.ui.courses
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
+import com.kyrgyzbilim.base.ApiResult
+import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.base.OnItemClickListener
 import com.kyrgyzbilim.data.course.Course
-import com.kyrgyzbilim.ui.adapters.CoursesAdapter
+import com.kyrgyzbilim.ui.adapters.CourseAdapter
 import com.kyrgyzbilim.ui.courses.sections.SectionsFragment
 import kotlinx.android.synthetic.main.fragment_courses.*
 
 
-class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
+class CoursesFragment : Fragment() {
 
-    private lateinit var adapter: CoursesAdapter
+    private lateinit var adapter: CourseAdapter
 
-//    private val mainViewModel: CourseViewModel by viewModels {
-//        InjectorObject.getMainViewModelFactory()
-//    }
+    private val courseViewModel: CourseViewModel by viewModels {
+        InjectorObject.getCourseViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_courses, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerCourse.hasFixedSize()
-        adapter = CoursesAdapter(this)
+        courseViewModel.course.observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    progress_bar.visibility = View.GONE
+                    recyclerCourse.visibility = View.VISIBLE
+                    initList(it.data)
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("Course Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    progress_bar.visibility = View.VISIBLE
+                    recyclerCourse.visibility = View.GONE
+                }
+            }
 
-        loadData()
+        }
+
 
     }
 
-    private fun loadData() {
-//        val course = сourseViewModel.getCourse()
-        val courseFakeList = arrayListOf(
-            Course(1,"Beginner","When an application component starts and the application does not have any other components running, the Android system", 20),
-            Course(2,"Elementary","When an application component starts and the application does not have any other components running, the Android system", 20)
-        )
+    private fun initList(characters: List<Course>) {
+
+        adapter = CourseAdapter(characters, object :
+            OnItemClickListener {
+            override fun <T> onItemClick(listItem: T) {
+                val sectionsFragment: Fragment =  SectionsFragment()
+
+                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                fragmentManager.beginTransaction()
+                    .setCustomAnimations(R.animator.slide_in_left,
+                        R.animator.slide_out_right, 0, 0)
+                    .replace(R.id.fragment_home, sectionsFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+
+        })
+
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerCourse.layoutManager = layoutManager
+        adapter.notifyDataSetChanged()
         recyclerCourse.adapter = adapter
-        adapter.submitList(courseFakeList)
+
     }
 
-    override fun onClickCourse(position: Int) {
 
-        val current = adapter.getItemId(position)
-
-        val sectionsFragment: Fragment =  SectionsFragment()
-
-        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
-        fragmentManager.beginTransaction()
-            .setCustomAnimations(R.animator.slide_in_left,
-                R.animator.slide_out_right, 0, 0)
-            .replace(R.id.fragment_home, sectionsFragment)
-            .addToBackStack(null)
-            .commit()
-    }
 }
