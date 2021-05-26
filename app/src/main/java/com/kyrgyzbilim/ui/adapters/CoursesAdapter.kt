@@ -1,58 +1,75 @@
 package com.kyrgyzbilim.ui.adapters
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.base.OnItemClickListener
-import com.kyrgyzbilim.data.course.Course
+import com.kyrgyzbilim.data.remote.course.Course
 import kotlinx.android.synthetic.main.item_courses.view.*
 
 class CourseAdapter(
-    private val items: List<Course>?,
-    private val onItemClickListener: OnItemClickListener
-) : RecyclerView.Adapter<CourseAdapter.CharactersViewHolder>() {
+    private val onClickListener: CourseClickListener,
+) : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
 
+    private lateinit var context: Context
 
+    companion object {
+        private val DIFF = object : DiffUtil.ItemCallback<Course>() {
+            override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-    inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
-        fun onBind(
-            course: Course,
-            onItemClickListener: OnItemClickListener
-        ) {
+    inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        @SuppressLint("ResourceAsColor")
+        fun onBind(position: Int) {
+            val course = getItem(position)
 
             itemView.level_title.text = course.name
             itemView.course_description.text = course.description
             itemView.percent_progress.text = course.progress.toString()
+            itemView.level_progress_bar.setProgressCompat(course.progress, true)
 
             itemView.setOnClickListener {
-                onItemClickListener.onItemClick(course)
-
+                onClickListener.onClickCourse(position)
             }
+
 
         }
 
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
-        return CharactersViewHolder(
+    interface CourseClickListener {
+        fun onClickCourse(position: Int)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
+        context = parent.context;
+        return CourseViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.item_courses, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: CharactersViewHolder, position: Int) {
-        holder.onBind(items!![position], onItemClickListener)
-    }
-
-    override fun getItemCount(): Int {
-        return items?.size!!
-
+    override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
+        holder.onBind(position)
     }
 
 
+    fun getItemAtPos(position: Int): Course {
+        return getItem(position)
+    }
 }

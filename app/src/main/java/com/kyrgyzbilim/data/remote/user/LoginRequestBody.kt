@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.data.user
+package com.kyrgyzbilim.data.remote.user
 
 data class LoginRequestBody(
     var phone_number: String,

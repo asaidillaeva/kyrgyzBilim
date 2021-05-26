@@ -1,9 +1,8 @@
 package com.kyrgyzbilim.ui.courses
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.kyrgyzbilim.base.ApiResult
-import com.kyrgyzbilim.data.course.repository.CourseRepository
+import com.kyrgyzbilim.data.remote.course.repository.CourseRepository
 
 class CourseViewModel (
     private val courseRepository: CourseRepository

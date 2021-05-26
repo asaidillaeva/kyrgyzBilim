@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.data.user
+package com.kyrgyzbilim.data.remote.user
 
 class User(
     val id: Int,

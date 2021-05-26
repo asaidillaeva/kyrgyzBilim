@@ -1,8 +1,8 @@
-package com.kyrgyzbilim.data.course.repository
+package com.kyrgyzbilim.data.remote.course.repository
 
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.apiCall
-import com.kyrgyzbilim.data.course.Course
+import com.kyrgyzbilim.data.remote.course.Course
 import com.kyrgyzbilim.data.remote.ServiceClient
 
 class CourseRepositoryImpl (

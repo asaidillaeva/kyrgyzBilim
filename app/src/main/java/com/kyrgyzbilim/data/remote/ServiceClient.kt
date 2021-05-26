@@ -1,13 +1,14 @@
 package com.kyrgyzbilim.data.remote
 
 import com.google.gson.GsonBuilder
-import com.kyrgyzbilim.data.course.Course
-import com.kyrgyzbilim.data.sections.Section
-import com.kyrgyzbilim.data.themes.Topic
-import com.kyrgyzbilim.data.user.LoginRequestBody
-import com.kyrgyzbilim.data.user.LoginResponse
-import com.kyrgyzbilim.data.user.RegisterResponse
-import com.kyrgyzbilim.data.user.User
+import com.kyrgyzbilim.data.remote.course.Course
+import com.kyrgyzbilim.data.remote.sections.Section
+import com.kyrgyzbilim.data.remote.subTopic.SubTopic
+import com.kyrgyzbilim.data.remote.topic.Topic
+import com.kyrgyzbilim.data.remote.user.LoginRequestBody
+import com.kyrgyzbilim.data.remote.user.LoginResponse
+import com.kyrgyzbilim.data.remote.user.RegisterResponse
+import com.kyrgyzbilim.data.remote.user.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit
 interface ServiceClient {
 
     companion object {
-        private const val baseUtl = "http://164.90.161.152"
+        private const val baseUtl = "http://159.89.29.83"
 
         private fun getGson() = GsonBuilder().setLenient().create()
 
@@ -55,13 +56,14 @@ interface ServiceClient {
     suspend fun  getCourses(): List<Course>
 
     @GET("/v1/courses/{id}/sections")
-    suspend fun  getSection(@Path("id") courseId: Int): List<Section>
-
-    @GET("/v1/topics/{id}")
-    suspend fun getSubTopics(@Path("id") courseId: Int): Response<Section>
+    suspend fun  getSection(@Path("id") id: Int): List<Section>
 
     @GET("/v1/sections/{id}/topics")
-    suspend fun getTopics(@Path("id") courseId: Int): Response<Topic>
+    suspend fun getTopics(@Path("id") id: Int): List<Topic>
+
+    @GET("/v1/topics/{id}")
+    suspend fun getSubTopics(@Path("id") id: Int): List<SubTopic>
+
 
 
 }

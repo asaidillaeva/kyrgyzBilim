@@ -2,7 +2,7 @@ package com.kyrgyzbilim.ui.courses
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kyrgyzbilim.data.course.repository.CourseRepository
+import com.kyrgyzbilim.data.remote.course.repository.CourseRepository
 
 class CourseViewModelFactory (
     private val courseRepository: CourseRepository
