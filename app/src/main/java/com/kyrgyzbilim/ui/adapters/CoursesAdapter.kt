@@ -5,16 +5,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.course.Course
+import com.kyrgyzbilim.ui.courses.CoursesFragmentDirections
 import kotlinx.android.synthetic.main.item_courses.view.*
 
-class CourseAdapter(
-    private val onClickListener: CourseClickListener,
-) : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
+class CourseAdapter() : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
 
     private lateinit var context: Context
 
@@ -42,18 +42,14 @@ class CourseAdapter(
             itemView.level_progress_bar.setProgressCompat(course.progress, true)
 
             itemView.setOnClickListener {
-                onClickListener.onClickCourse(position)
+                val action = CoursesFragmentDirections.actionCoursesFragmentToSectionsFragment(course.id)
+                val nav = Navigation.findNavController(it)
+                nav.navigateUp()
+                nav.navigate(action)
             }
-
-
         }
-
     }
 
-
-    interface CourseClickListener {
-        fun onClickCourse(position: Int)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         context = parent.context;

@@ -21,8 +21,6 @@ import com.kyrgyzbilim.ui.courses.sections.SectionsFragment
 import kotlinx.android.synthetic.main.item_sections.view.*
 
 class SectionAdapter(
-    private val onClickListener: SectionClickListener,
-    private val themesOnClickListener: ThemesAdapter.ThemesOnClickListener,
     private var sectionList: List<Section>?
 ) : ListAdapter<Section, SectionAdapter.SectionViewHolder>(DIFF) {
 
@@ -50,12 +48,7 @@ class SectionAdapter(
             val themesRV = itemView.themes_RV
             val cardItem = itemView.section_background
 
-            itemView.setOnClickListener {
-                onClickListener.onClickSection(position)
-            }
-
-
-            themesAdapter.setData(themesOnClickListener, sectionList?.get(position)?.topics)
+            themesAdapter.setData(sectionList?.get(position)?.topics)
             themesRV?.adapter = themesAdapter
             themesAdapter.submitList(sectionList?.get(position)?.topics)
 
@@ -70,9 +63,7 @@ class SectionAdapter(
                         override fun onAnimationEnd(animation: Animator) {
                             val layoutParams = themesRV.layoutParams
                             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-
                         }
-
                     })
 
 
@@ -117,11 +108,6 @@ class SectionAdapter(
 
         anim.addListener(animationEndListener)
         anim.start()
-    }
-
-
-    interface SectionClickListener {
-        fun onClickSection(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SectionViewHolder {

@@ -14,13 +14,10 @@ import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
 import com.kyrgyzbilim.ui.adapters.ThemesAdapter
-import com.kyrgyzbilim.ui.courses.CoursesFragment
-import com.kyrgyzbilim.ui.courses.sections.subtopics.dialog.DialogFragmentK
 import kotlinx.android.synthetic.main.fragment_sections.*
 
 
-class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
-    ThemesAdapter.ThemesOnClickListener {
+class SectionsFragment : Fragment() {
 
     private lateinit var sectionAdapter: SectionAdapter
     private lateinit var themesAdapter: ThemesAdapter
@@ -42,21 +39,18 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = this.arguments
-        if (bundle != null) {
-            val courseId = bundle.getInt(CoursesFragment.COURSE_ID, defaultValue)
+        arguments?.let {
+            val courseId = SectionsFragmentArgs.fromBundle(it).sectionId
             sectionViewModel.setCourseId(courseId)
-
         }
-
 
         getSection()
 
     }
 
 
-     fun getSection() {
-        var topicListIn: List<Topic>? = null
+    fun getSection() {
+        val topicListIn: List<Topic>? = null
 
         sectionViewModel.section.observe(viewLifecycleOwner) { that ->
             when (that) {
@@ -65,31 +59,7 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
                     recyclerSection.visibility = View.VISIBLE
                     Log.e("Section Success", that.data.toString())
 
-//                    sectionViewModel.topics.observe(viewLifecycleOwner) {
-//                        when (it) {
-//                            is ApiResult.Success -> {
-//                                progress_bar.visibility = View.GONE
-//                                recyclerSection.visibility = View.VISIBLE
-//                                topicListIn = it.data
-//                                Log.e("Topic Success", it.data.toString())
-//
-//                            }
-//                            is ApiResult.Error -> {
-//                                it.throwable.message.toString()
-//                                Log.e("Course Error", it.throwable.message.toString())
-//                            }
-//                            is ApiResult.Loading -> {
-//                                progress_bar.visibility = View.VISIBLE
-//                                recyclerSection.visibility = View.GONE
-//                            }
-//
-//                        }
-
-//                        initList(that.data, topicListIn,sectionViewModel)
-                        initList(that.data, topicListIn)
-
-//                    }
-
+                    initList(that.data)
                 }
                 is ApiResult.Error -> {
                     that.throwable.message.toString()
@@ -103,17 +73,12 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
 
 
         }
-
-
     }
 
 
-    private fun initList(sections: List<Section>?, topics: List<Topic>?) {
+    private fun initList(sections: List<Section>?) {
 
-        sectionAdapter = SectionAdapter(this, this, sections)
-
-        themesAdapter = ThemesAdapter()
-        themesAdapter.setData(this, topics)
+        sectionAdapter = SectionAdapter(sections)
 
 
         recyclerSection.adapter = sectionAdapter
@@ -127,30 +92,5 @@ class SectionsFragment : Fragment(), SectionAdapter.SectionClickListener,
         go_back.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack();
         }
-    }
-
-
-    override fun onClickSection(position: Int) {
-
-    }
-
-    override fun onClickTheme(position: Int) {
-        val current = themesAdapter.getItemAtPos(position)
-
-        Log.d("me", "theme clicked")
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.animator.slide_in_left,
-                R.animator.slide_out_right, 0, 0
-            )
-            .replace(R.id.fragment_home, DialogFragmentK())
-            .addToBackStack(null)
-            .commit()
-
-        val fragment = SectionsFragment()
-        val bundle = Bundle()
-        bundle.putInt(CoursesFragment.COURSE_ID, current.id)
-        fragment.arguments = bundle
     }
 }

@@ -1,28 +1,24 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.remote.course.Course
-import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
-import kotlinx.android.synthetic.main.item_sections.view.*
+import com.kyrgyzbilim.ui.courses.sections.SectionsFragmentDirections
 import kotlinx.android.synthetic.main.item_themes.view.*
 
 
 class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
-    private lateinit var onClickListener: ThemesOnClickListener
     private lateinit var items: List<Topic>
 
-
-    companion object{
-        val DIFF  = object: DiffUtil.ItemCallback<Topic>(){
+    companion object {
+        val DIFF = object : DiffUtil.ItemCallback<Topic>() {
             override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -35,46 +31,34 @@ class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
     }
 
     fun setData(
-       onClickListener: ThemesOnClickListener,
-       items: List<Topic>?,
-    ){
-        this.onClickListener = onClickListener
+        items: List<Topic>?,
+    ) {
         if (items != null) {
             this.items = items
         }
     }
 
-    inner class ThemeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun onBind(position: Int){
+    inner class ThemeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun onBind(position: Int) {
             val currentTheme = getItem(position)
 
-            val themesRV = itemView.themes_RV
+            itemView.theme_title.text = currentTheme.name
 
-            itemView.theme_title.text = items[position].name
+            itemView.themeRV_item.setOnClickListener {
+                val action =
+                    SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment()
+                val nav = Navigation.findNavController(it)
 
-
-            itemView.setOnClickListener{
-                onClickListener.onClickTheme(position)
+                nav.navigate(action)
             }
-
-            itemView.theme_title.setOnClickListener{
-
-            }
-
         }
     }
 
-    fun getItemAtPos(position: Int): Topic {
-        return getItem(position)
-    }
-
-
-    interface ThemesOnClickListener {
-        fun onClickTheme(position: Int)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
-        return ThemeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_themes,parent,false))
+        return ThemeViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_themes, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
