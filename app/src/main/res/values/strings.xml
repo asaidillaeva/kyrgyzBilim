@@ -13,4 +13,5 @@
     <string name="sign_in">Sign In</string>
     <string name="grammar_example">а, ы, о, у, ү, ө ,и ,э(е)</string>
     <string name="grammar_explanation">Кыска үндүүлөр:</string>
+    <string name="dialog">Dialog</string>
 </resources>

@@ -1,66 +1,71 @@
 package com.kyrgyzbilim.ui.courses
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
+import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
-import com.kyrgyzbilim.data.Course
-import com.kyrgyzbilim.ui.adapters.CoursesAdapter
+import com.kyrgyzbilim.data.remote.course.Course
+import com.kyrgyzbilim.ui.adapters.CourseAdapter
 import kotlinx.android.synthetic.main.fragment_courses.*
 
+class CoursesFragment : Fragment() {
 
-class CoursesFragment : Fragment(), CoursesAdapter.CoursesClickListener {
 
-    private lateinit var adapter: CoursesAdapter
+    private lateinit var adapter: CourseAdapter
 
-//    private val mainViewModel: CourseViewModel by viewModels {
-//        InjectorObject.getMainViewModelFactory()
-//    }
-
+    private val courseViewModel: CourseViewModel by viewModels {
+        InjectorObject.getCourseViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_courses, container, false)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerCourse.hasFixedSize()
-        adapter = CoursesAdapter(this)
+        courseViewModel.course.observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    progress_bar.visibility = View.GONE
+                    recyclerCourse.visibility = View.VISIBLE
+                    initList(it.data)
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("Course Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    progress_bar.visibility = View.VISIBLE
+                    recyclerCourse.visibility = View.GONE
+                }
+            }
 
-        loadData()
-
-
+        }
 
     }
 
-    private fun loadData() {
-//        val course = сourseViewModel.getCourse()
-        val course  = Course(1,"Beginner","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course1  = Course(2,"Elementary","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course2  = Course(3,"Pre-intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course3  = Course(4,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course4  = Course(5,"Upper-intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course5  = Course(6,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val course6  = Course(7,"Intermediate","When an application component starts and the application does not have any other components running, the Android system", 20)
-        val courseFakeList = arrayListOf(course, course1, course2, course3, course4, course5, course6)
+    private fun initList(courseList: List<Course>) {
+        adapter = CourseAdapter()
         recyclerCourse.adapter = adapter
-        adapter.submitList(courseFakeList)
+        adapter.submitList(courseList)
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerCourse.layoutManager = layoutManager
+        adapter.notifyDataSetChanged()
+        recyclerCourse.adapter = adapter
+
     }
 
-    override fun onClickCourse(position: Int) {
-
-        val current = adapter.getItemId(position)
-
-        //TODO: open ThemesFragment
-    }
 }
