@@ -1,22 +1,25 @@
 package com.kyrgyzbilim.ui.adapters
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.course.Course
+import com.kyrgyzbilim.data.remote.course.Course
+import com.kyrgyzbilim.ui.courses.CoursesFragmentDirections
 import kotlinx.android.synthetic.main.item_courses.view.*
 
-class CoursesAdapter(
-        private val onClickListener: CoursesClickListener
-) : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF) {
+class CourseAdapter() : ListAdapter<Course, CourseAdapter.CourseViewHolder>(DIFF) {
 
+    private lateinit var context: Context
 
-    companion object{
-        private  val DIFF = object : DiffUtil.ItemCallback<Course>(){
+    companion object {
+        private val DIFF = object : DiffUtil.ItemCallback<Course>() {
             override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -29,27 +32,32 @@ class CoursesAdapter(
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("ResourceAsColor")
         fun onBind(position: Int) {
-            val currentCourse = getItem(position)
+            val course = getItem(position)
 
-            itemView.level_title.text = currentCourse.levelTitle
-            itemView.course_description.text = currentCourse.description
-            itemView.percent_progress.text = currentCourse.progress.toString() + "%"
+            itemView.level_title.text = course.name
+            itemView.course_description.text = course.description
+            itemView.percent_progress.text = course.progress.toString()
+            itemView.level_progress_bar.setProgressCompat(course.progress, true)
 
             itemView.setOnClickListener {
-                onClickListener.onClickCourse(position)
+                val action = CoursesFragmentDirections.actionCoursesFragmentToSectionsFragment(course.id)
+                val nav = Navigation.findNavController(it)
+                nav.navigateUp()
+                nav.navigate(action)
             }
         }
     }
 
-    interface CoursesClickListener{
-        fun onClickCourse(position : Int)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        return CourseViewHolder(LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_courses, parent, false))
+        context = parent.context;
+        return CourseViewHolder(
+            LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.item_courses, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
@@ -57,7 +65,7 @@ class CoursesAdapter(
     }
 
 
+    fun getItemAtPos(position: Int): Course {
+        return getItem(position)
+    }
 }
-
-
-

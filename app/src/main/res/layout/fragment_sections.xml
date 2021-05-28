@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkWhite"
-    android:orientation="vertical"
     tools:context=".ui.courses.sections.SectionsFragment">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/purple_500"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/darkWhite"
+        android:orientation="vertical" >
+
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -54,4 +68,7 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:listitem="@layout/item_sections" />
-</LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
