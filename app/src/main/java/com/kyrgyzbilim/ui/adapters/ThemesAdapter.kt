@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
             itemView.theme_title.text = currentTheme.name
 
             itemView.themeRV_item.setOnClickListener {
+                Log.e("clicek", sectionType.toString())
                 val action = when (sectionType) {
                     "Vocabulary" ->
                         SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id)

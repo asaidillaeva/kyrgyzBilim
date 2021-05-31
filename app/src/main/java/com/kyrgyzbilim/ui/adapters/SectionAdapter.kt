@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,13 +49,15 @@ class SectionAdapter(
             val themesRV = itemView.themes_RV
             val cardItem = itemView.section_background
 
-            themesAdapter.setData(sectionList?.get(position)?.topics, sectionList?.get(position)?.type)
-            themesRV?.adapter = themesAdapter
-            themesAdapter.submitList(sectionList?.get(position)?.topics)
+
 
             itemView.section_title.text = currentSection.name
 
             itemView.section_item_card.setOnClickListener {
+                themesAdapter.setData(sectionList?.get(position)?.topics, sectionList?.get(position)?.type)
+                themesRV?.adapter = themesAdapter
+                themesAdapter.submitList(sectionList?.get(position)?.topics)
+
 
                 if (themesRV.visibility == View.GONE) {
                     themesRV.visibility = View.VISIBLE
