@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/dialogFragmentK"
-        android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.dialog.DialogFragmentK"
+        android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.dialog.DialogFragment"
         android:label="fragment_dialog"
         tools:layout="@layout/fragment_dialog" >
         <argument

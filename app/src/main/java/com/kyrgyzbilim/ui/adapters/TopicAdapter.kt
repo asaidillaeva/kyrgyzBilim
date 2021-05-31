@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
 import com.kyrgyzbilim.ui.courses.sections.SectionsFragmentDirections
 import kotlinx.android.synthetic.main.item_themes.view.*
 
 
-class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
+class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
     private  var items: List<Topic>? = null
     private  var sectionType: String? = null
 

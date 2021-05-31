@@ -13,14 +13,14 @@ import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
-import com.kyrgyzbilim.ui.adapters.ThemesAdapter
+import com.kyrgyzbilim.ui.adapters.TopicAdapter
 import kotlinx.android.synthetic.main.fragment_sections.*
 
 
 class SectionsFragment : Fragment() {
 
     private lateinit var sectionAdapter: SectionAdapter
-    private lateinit var themesAdapter: ThemesAdapter
+    private lateinit var topicAdapter: TopicAdapter
     private var defaultValue: Int = -1
     private var sectionList: List<Section>? = null
     private var topicList: List<Topic>? = null
