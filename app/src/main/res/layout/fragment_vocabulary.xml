@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgraungDefault"
     tools:context=".ui.courses.sections.SectionsFragment">
-
 
     <TextView
         android:id="@+id/textView2"
@@ -43,33 +43,39 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:context=".ui.courses.sections.subtopics.vocabulary.VocabularyFragment">
 
-        <TextView
-            android:id="@+id/vocabularyTheme"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="17dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="САЛАМ, АТЫӉ КИМ?"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:padding="10dp"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/vocabularyThemeEn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Hi, What is your name?"
-            android:textColor="@color/darkMain"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/vocabularyTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="САЛАМ, АТЫӉ КИМ?"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerVocabulary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            tools:listitem="@layout/item_dialog" />
+            <TextView
+                android:id="@+id/vocabularyThemeEn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Hi, What is your name?"
+                android:textColor="@color/darkMain"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/vocabularyTheme" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerVocabulary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/vocabularyThemeEn"
+                tools:listitem="@layout/item_dialog" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
