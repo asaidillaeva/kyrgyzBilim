@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_courses.*
 
 class CoursesFragment : Fragment() {
 
-
     private lateinit var adapter: CourseAdapter
 
     private val courseViewModel: CourseViewModel by viewModels {
@@ -52,9 +51,7 @@ class CoursesFragment : Fragment() {
                     recyclerCourse.visibility = View.GONE
                 }
             }
-
         }
-
     }
 
     private fun initList(courseList: List<Course>) {

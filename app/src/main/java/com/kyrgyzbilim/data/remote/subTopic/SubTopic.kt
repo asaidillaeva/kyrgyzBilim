@@ -2,6 +2,7 @@ package com.kyrgyzbilim.data.remote.subTopic
 
 data class SubTopic(
     val id: Int = 0,
+    val body: String = "",
     val name: String = "",
     val translated_name: String = "",
     val icon: String = " ",

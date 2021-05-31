@@ -16,6 +16,4 @@ class Section(
     override fun toString(): String {
         return "Section(id=$id, name='$name', type='$type', topics=$topics)"
     }
-
-
 }
