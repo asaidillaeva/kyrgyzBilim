@@ -62,12 +62,22 @@
         <action
             android:id="@+id/action_sectionsFragment_to_dialogFragmentK2"
             app:destination="@id/dialogFragmentK" />
+        <action
+            android:id="@+id/action_sectionsFragment_to_errorFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/grammarFragment"
         android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.grammar.GrammarFragment"
         android:label="fragment_grammar"
-        tools:layout="@layout/fragment_grammar" />
+        tools:layout="@layout/fragment_grammar" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.kyrgyzbilim.ui.authorization.RegistrationFragment"
@@ -81,10 +91,25 @@
         android:id="@+id/textFragment"
         android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.text.TextFragment"
         android:label="fragment_text"
-        tools:layout="@layout/fragment_text" />
+        tools:layout="@layout/fragment_text" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/vocabularyFragment"
         android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.vocabulary.VocabularyFragment"
         android:label="fragment_vocabulary"
-        tools:layout="@layout/fragment_vocabulary" />
+        tools:layout="@layout/fragment_vocabulary" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.ErrorFragment"
+        android:label="fragment_error"
+        tools:layout="@layout/fragment_error" />
 </navigation>

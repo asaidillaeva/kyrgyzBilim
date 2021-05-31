@@ -48,7 +48,7 @@ class SectionAdapter(
             val themesRV = itemView.themes_RV
             val cardItem = itemView.section_background
 
-            themesAdapter.setData(sectionList?.get(position)?.topics)
+            themesAdapter.setData(sectionList?.get(position)?.topics, sectionList?.get(position)?.type)
             themesRV?.adapter = themesAdapter
             themesAdapter.submitList(sectionList?.get(position)?.topics)
 
