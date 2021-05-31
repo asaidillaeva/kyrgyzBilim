@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
-import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
 import com.kyrgyzbilim.ui.courses.sections.SectionsFragmentDirections
 import kotlinx.android.synthetic.main.item_themes.view.*
 
 
-class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
+class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
     private  var items: List<Topic>? = null
     private  var sectionType: String? = null
 
@@ -47,6 +47,7 @@ class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
             itemView.theme_title.text = currentTheme.name
 
             itemView.themeRV_item.setOnClickListener {
+                Log.e("clicek", sectionType.toString())
                 val action = when (sectionType) {
                     "Vocabulary" ->
                         SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id)

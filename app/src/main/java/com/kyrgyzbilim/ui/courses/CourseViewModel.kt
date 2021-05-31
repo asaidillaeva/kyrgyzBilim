@@ -18,8 +18,6 @@ class CourseViewModel (
         }
     }
 
-
-
     val course = liveData {
         emit(ApiResult.Loading)
         val result = courseRepository.getCourseList()
