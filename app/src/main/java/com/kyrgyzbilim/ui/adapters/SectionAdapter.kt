@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.sections.Section
-import com.kyrgyzbilim.data.remote.topic.Topic
-import com.kyrgyzbilim.ui.courses.sections.SectionViewModel
-import com.kyrgyzbilim.ui.courses.sections.SectionsFragment
 import kotlinx.android.synthetic.main.item_sections.view.*
 
 class SectionAdapter(
@@ -26,7 +22,7 @@ class SectionAdapter(
 ) : ListAdapter<Section, SectionAdapter.SectionViewHolder>(DIFF) {
 
     private lateinit var context: Context
-    private var themesAdapter = ThemesAdapter()
+    private var themesAdapter = TopicAdapter()
 
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<Section>() {
