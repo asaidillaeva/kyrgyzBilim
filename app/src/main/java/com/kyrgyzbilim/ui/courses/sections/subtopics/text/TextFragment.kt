@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
-import com.kyrgyzbilim.ui.adapters.CourseAdapter
 import com.kyrgyzbilim.ui.adapters.TextAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_text.*
