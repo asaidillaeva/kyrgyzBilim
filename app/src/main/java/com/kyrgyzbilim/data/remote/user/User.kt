@@ -1,5 +1,7 @@
 package com.kyrgyzbilim.data.remote.user
 
+import com.kyrgyzbilim.data.UserData
+
 class User(
     val id: Int,
     val name: String,
@@ -7,4 +9,5 @@ class User(
     val image: String,
     val level: String
 ) {
+
 }
