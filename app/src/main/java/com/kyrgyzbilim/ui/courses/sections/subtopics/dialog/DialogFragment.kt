@@ -7,18 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
+import kotlinx.android.synthetic.main.fragment_courses.*
 import kotlinx.android.synthetic.main.fragment_dialog.*
+import kotlinx.android.synthetic.main.fragment_dialog.progress_bar
 
 class DialogFragment : Fragment() {
 
     private val subTopicViewModel: SubTopicViewModel by viewModels {
-        InjectorObject.getSectionViewModelFactory()
+        InjectorObject.getSubTopicViewModelFactory()
     }
     private lateinit var dialogAdapter: DialogAdapter
 
@@ -38,6 +41,7 @@ class DialogFragment : Fragment() {
             val topicId = DialogFragmentArgs.fromBundle(it).id
             subTopicViewModel.setTopic(topicId)
         }
+
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner){
             when (it) {
@@ -65,6 +69,10 @@ class DialogFragment : Fragment() {
         dialogAdapter = DialogAdapter(data)
         recyclerDialog.adapter = dialogAdapter
         dialogAdapter.submitList(data)
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerDialog.layoutManager = layoutManager
+        dialogAdapter.notifyDataSetChanged()
+        recyclerDialog.adapter = dialogAdapter
 
     }
 

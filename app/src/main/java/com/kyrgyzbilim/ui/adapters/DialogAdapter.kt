@@ -35,8 +35,8 @@ class DialogAdapter (private var subTopicList: List<SubTopic>?
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 
-            itemView.dialog.text = currentSection.text
-            itemView.translationDialog.text = currentSection.translatedText
+            itemView.dialog.text = currentSection.name
+            itemView.translationDialog.text = currentSection.translated_name
 
         }
     }

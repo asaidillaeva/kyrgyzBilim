@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.kyrgyzbilim.base.ApiResult
@@ -14,7 +15,6 @@ class SubTopicViewModel(
     fun setTopic(idSet: Int){
         idTopic = idSet
     }
-
 
 
     val subTopic = liveData {

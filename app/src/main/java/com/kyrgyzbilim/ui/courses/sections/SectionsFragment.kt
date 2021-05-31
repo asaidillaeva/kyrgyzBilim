@@ -20,10 +20,6 @@ import kotlinx.android.synthetic.main.fragment_sections.*
 class SectionsFragment : Fragment() {
 
     private lateinit var sectionAdapter: SectionAdapter
-    private lateinit var topicAdapter: TopicAdapter
-    private var defaultValue: Int = -1
-    private var sectionList: List<Section>? = null
-    private var topicList: List<Topic>? = null
 
     private val sectionViewModel: SectionViewModel by viewModels {
         InjectorObject.getSectionViewModelFactory()
