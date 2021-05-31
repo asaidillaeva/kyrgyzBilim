@@ -11,14 +11,17 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
+import com.kyrgyzbilim.ui.adapters.DialogAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
-import kotlinx.android.synthetic.main.fragment_sections.*
+import kotlinx.android.synthetic.main.fragment_dialog.*
 
 class DialogFragment : Fragment() {
 
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSectionViewModelFactory()
     }
+    private lateinit var dialogAdapter: DialogAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,15 +35,15 @@ class DialogFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            val topicId = DialogFragmentKArgs.fromBundle(it).id
+            val topicId = DialogFragmentArgs.fromBundle(it).id
             subTopicViewModel.setTopic(topicId)
         }
 
-        subTopicViewModel.subTopic.observe(viewLifecycleOwner){it ->
+        subTopicViewModel.subTopic.observe(viewLifecycleOwner){
             when (it) {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
-                    recyclerSection.visibility = View.VISIBLE
+                    recyclerDialog.visibility = View.VISIBLE
                     Log.e("Section Success", it.data.toString())
                     initList(it.data)
                 }
@@ -50,7 +53,7 @@ class DialogFragment : Fragment() {
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE
-                    recyclerSection.visibility = View.GONE
+                    recyclerDialog.visibility = View.GONE
                 }
             }
         }
@@ -59,6 +62,11 @@ class DialogFragment : Fragment() {
     }
 
     private fun initList(data: List<SubTopic>) {
+        dialogAdapter = DialogAdapter(data)
+        recyclerDialog.adapter = dialogAdapter
+        dialogAdapter.submitList(data)
 
     }
+
+
 }

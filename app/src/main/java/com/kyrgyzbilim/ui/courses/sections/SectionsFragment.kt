@@ -77,10 +77,7 @@ class SectionsFragment : Fragment() {
 
 
     private fun initList(sections: List<Section>?) {
-
         sectionAdapter = SectionAdapter(sections)
-
-
         recyclerSection.adapter = sectionAdapter
         sectionAdapter.submitList(sections)
 
