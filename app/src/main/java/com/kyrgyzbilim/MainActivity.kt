@@ -21,13 +21,13 @@ open class MainActivity : AppCompatActivity() {
         // checking login
         val token = UserData.of(this).getToken()
 
-        if(token == null){
-            // not logged in
-            startActivity(Intent(this, AuthActivity::class.java))
-            Thread{
-                Thread.sleep(500)
-                finish()
-            }.start()
-        }
+//        if(token == null){
+//            // not logged in
+//            startActivity(Intent(this, AuthActivity::class.java))
+//            Thread{
+//                Thread.sleep(500)
+//                finish()
+//            }.start()
+//        }
     }
 }
