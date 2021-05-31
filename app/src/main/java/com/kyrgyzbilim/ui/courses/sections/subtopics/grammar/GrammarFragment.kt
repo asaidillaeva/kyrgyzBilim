@@ -14,10 +14,6 @@ import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.ui.adapters.GrammarAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_grammar.*
-import kotlinx.android.synthetic.main.fragment_text.*
-import kotlinx.android.synthetic.main.fragment_text.recyclerText
-import kotlinx.android.synthetic.main.fragment_text.text_progress_bar
-import kotlinx.android.synthetic.main.item_grammar.*
 
 
 class GrammarFragment : Fragment() {
@@ -36,6 +32,20 @@ class GrammarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var topicTranslatedName = "text"
+        var topicName = "text"
+        arguments?.let {
+            val args = GrammarFragmentArgs.fromBundle(it)
+            val topicId = args.id
+            topicName = args.name
+            topicTranslatedName = args.translatedName
+            subTopicViewModel.setTopic(topicId)
+        }
+
+        grammarTitle?.text = topicName
+        grammarTitleEn?.text = topicTranslatedName
+
         val layoutManager = LinearLayoutManager(activity)
         val adapter = GrammarAdapter()
         recyclerGrammar.layoutManager = layoutManager

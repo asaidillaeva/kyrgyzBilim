@@ -36,10 +36,19 @@ class DialogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var topicTranslatedName = "text"
+        var topicName = "text"
         arguments?.let {
-            val topicId = DialogFragmentArgs.fromBundle(it).id
+            val args = DialogFragmentArgs.fromBundle(it)
+            val topicId = args.id
+            topicName = args.name
+            topicTranslatedName = args.translatedName
             subTopicViewModel.setTopic(topicId)
         }
+
+        dialogTitle.text = topicName
+        dialogTitleEn.text = topicTranslatedName
 
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner){

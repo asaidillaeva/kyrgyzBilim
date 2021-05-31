@@ -14,8 +14,8 @@ import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
-import com.kyrgyzbilim.ui.courses.sections.subtopics.dialog.DialogFragmentArgs
 import kotlinx.android.synthetic.main.fragment_vocabulary.*
+import kotlinx.android.synthetic.main.fragment_vocabulary.progress_bar
 
 class VocabularyFragment : Fragment() {
     private val subTopicViewModel: SubTopicViewModel by viewModels {
@@ -35,10 +35,19 @@ class VocabularyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var topicTranslatedName = "text"
+        var topicName = "text"
         arguments?.let {
-            val topicId = VocabularyFragmentArgs.fromBundle(it).id
+            val args = VocabularyFragmentArgs.fromBundle(it)
+            val topicId = args.id
+            topicName = args.name
+            topicTranslatedName = args.translatedName
             subTopicViewModel.setTopic(topicId)
         }
+
+        vocabularyTheme.text = topicName
+        vocabularyThemeEn.text = topicTranslatedName
 
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner) {

@@ -47,16 +47,15 @@ class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
             itemView.theme_title.text = currentTheme.name
 
             itemView.themeRV_item.setOnClickListener {
-                Log.e("clicek", sectionType.toString())
                 val action = when (sectionType) {
                     "Vocabulary" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id)
+                        SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
                     "Dialogs" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(currentTheme.id)
+                        SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(currentTheme.id,currentTheme.name, currentTheme.translated_name)
                     "Texts" ->
                         SectionsFragmentDirections.actionSectionsFragmentToTextFragment(currentTheme.id)
                     "Grammar" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(currentTheme.id)
+                        SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(currentTheme.id, currentTheme.name, currentTheme.translated_name)
                     else -> SectionsFragmentDirections.actionSectionsFragmentToErrorFragment()
 
                 }

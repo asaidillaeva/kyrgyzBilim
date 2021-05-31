@@ -32,7 +32,53 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:layout_editor_absoluteX="18dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/grammarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Саламдашуу"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="/"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/grammarTitleEn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:layout_toEndOf="@id/dialogTitle"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Greetings"
+                    android:textColor="@color/darkMain"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="49dp"
             android:id="@+id/recyclerGrammar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
