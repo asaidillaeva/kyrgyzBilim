@@ -28,18 +28,6 @@
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.kyrgyzbilim.ui.authorization.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_coursesFragment"
-            app:destination="@id/coursesFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/sectionsFragment"
         android:name="com.kyrgyzbilim.ui.courses.sections.SectionsFragment"
         android:label="fragment_sections"
@@ -68,15 +56,6 @@
         android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.grammar.GrammarFragment"
         android:label="fragment_grammar"
         tools:layout="@layout/fragment_grammar" />
-    <fragment
-        android:id="@+id/registrationFragment"
-        android:name="com.kyrgyzbilim.ui.authorization.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
-        <action
-            android:id="@+id/action_registrationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
     <fragment
         android:id="@+id/textFragment"
         android:name="com.kyrgyzbilim.ui.courses.sections.subtopics.text.TextFragment"
