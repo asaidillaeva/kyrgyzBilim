@@ -12,9 +12,8 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
-import com.kyrgyzbilim.ui.adapters.DialogAdapter
+import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
-import kotlinx.android.synthetic.main.fragment_courses.*
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import kotlinx.android.synthetic.main.fragment_dialog.progress_bar
 
@@ -23,7 +22,7 @@ class DialogFragment : Fragment() {
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }
-    private lateinit var dialogAdapter: DialogAdapter
+    private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
 
 
     override fun onCreateView(
@@ -66,13 +65,13 @@ class DialogFragment : Fragment() {
     }
 
     private fun initList(data: List<SubTopic>) {
-        dialogAdapter = DialogAdapter(data)
-        recyclerDialog.adapter = dialogAdapter
-        dialogAdapter.submitList(data)
+        dialogVocabularyAdapter = DialogVocabularyAdapter(data)
+        recyclerDialog.adapter = dialogVocabularyAdapter
+        dialogVocabularyAdapter.submitList(data)
         val layoutManager = LinearLayoutManager(activity)
         recyclerDialog.layoutManager = layoutManager
-        dialogAdapter.notifyDataSetChanged()
-        recyclerDialog.adapter = dialogAdapter
+        dialogVocabularyAdapter.notifyDataSetChanged()
+        recyclerDialog.adapter = dialogVocabularyAdapter
 
     }
 
