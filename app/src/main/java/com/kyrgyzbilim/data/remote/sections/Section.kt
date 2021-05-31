@@ -6,6 +6,7 @@ class Section(
     val id: Int,
     val name: String,
 //    val icon: Int,
+    val type: String,
     val topics: List<Topic>
 ) {
     override fun equals(other: Any?): Boolean {
@@ -13,7 +14,7 @@ class Section(
     }
 
     override fun toString(): String {
-        return "Section(id=$id, name='$name', topics=$topics)"
+        return "Section(id=$id, name='$name', type='$type', topics=$topics)"
     }
 
 
