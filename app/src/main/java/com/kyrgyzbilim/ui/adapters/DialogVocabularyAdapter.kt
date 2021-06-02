@@ -12,8 +12,8 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import kotlinx.android.synthetic.main.item_dialog.view.*
 
-class DialogAdapter (private var subTopicList: List<SubTopic>?
-) : ListAdapter<SubTopic, DialogAdapter.SubTopicViewHolder>(DIFF) {
+class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
+) : ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
 
     private lateinit var context: Context
 
