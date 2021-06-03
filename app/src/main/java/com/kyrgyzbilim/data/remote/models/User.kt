@@ -7,4 +7,5 @@ class User(
     val image: String,
     val level: String
 ) {
+
 }

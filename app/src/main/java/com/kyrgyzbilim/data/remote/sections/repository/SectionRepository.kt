@@ -1,6 +1,7 @@
-package com.kyrgyzbilim.data.remote.sections
+package com.kyrgyzbilim.data.remote.sections.repository
 
 import com.kyrgyzbilim.base.ApiResult
+import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.topic.Topic
 
 interface SectionRepository {

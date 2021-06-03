@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.kyrgyzbilim.R
-import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 
 
 class RegistrationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,11 +22,8 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.to_sign_up_button.setOnClickListener {
-            val action = RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment()
-            val nav = Navigation.findNavController(it)
-            nav.navigateUp()
-            nav.navigate(action)
+        view.to_sign_in_button.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 }

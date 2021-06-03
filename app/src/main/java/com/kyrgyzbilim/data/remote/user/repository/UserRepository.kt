@@ -1,7 +1,10 @@
-package com.kyrgyzbilim.data.remote.user
+package com.kyrgyzbilim.data.remote.user.repository
 
 import com.kyrgyzbilim.base.ApiResult
-import com.kyrgyzbilim.data.remote.topic.Topic
+import com.kyrgyzbilim.data.remote.user.LoginRequestBody
+import com.kyrgyzbilim.data.remote.user.LoginResponse
+import com.kyrgyzbilim.data.remote.user.RegisterRequestBody
+import com.kyrgyzbilim.data.remote.user.RegisterResponse
 import retrofit2.Response
 
 interface UserRepository {
