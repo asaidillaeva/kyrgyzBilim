@@ -1,4 +1,11 @@
 package com.kyrgyzbilim.data.remote.user
 
-class LoginResponse {
+data class LoginResponse(
+    val error: String?,
+    val invalid_args: ArrayList<InvalidArgs>,
+    val refresh_token: String?,
+    val access_token: String?
+) {
+
 }
+

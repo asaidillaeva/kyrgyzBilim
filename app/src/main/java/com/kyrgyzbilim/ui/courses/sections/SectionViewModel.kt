@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.kyrgyzbilim.base.ApiResult
-import com.kyrgyzbilim.data.remote.sections.SectionRepository
+import com.kyrgyzbilim.data.remote.sections.repository.SectionRepository
 
 class SectionViewModel(
     private val sectionRepository: SectionRepository

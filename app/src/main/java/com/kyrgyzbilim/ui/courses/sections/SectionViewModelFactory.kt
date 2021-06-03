@@ -2,7 +2,7 @@ package com.kyrgyzbilim.ui.courses.sections
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kyrgyzbilim.data.remote.sections.SectionRepository
+import com.kyrgyzbilim.data.remote.sections.repository.SectionRepository
 
 class SectionViewModelFactory (
     private val sectionRepository: SectionRepository

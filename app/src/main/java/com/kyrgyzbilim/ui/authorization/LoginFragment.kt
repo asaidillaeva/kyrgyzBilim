@@ -25,7 +25,6 @@ class LoginFragment : Fragment() {
         view.to_sign_up_button.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToRegistrationFragment()
             val nav = Navigation.findNavController(it)
-            nav.navigateUp()
             nav.navigate(action)
         }
     }

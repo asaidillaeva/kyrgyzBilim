@@ -5,10 +5,7 @@ import com.kyrgyzbilim.data.remote.course.Course
 import com.kyrgyzbilim.data.remote.sections.Section
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.data.remote.topic.Topic
-import com.kyrgyzbilim.data.remote.user.LoginRequestBody
-import com.kyrgyzbilim.data.remote.user.LoginResponse
-import com.kyrgyzbilim.data.remote.user.RegisterResponse
-import com.kyrgyzbilim.data.remote.user.User
+import com.kyrgyzbilim.data.remote.user.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -48,6 +45,11 @@ interface ServiceClient {
 
     @POST("/v1/auth/login")
     suspend fun  login( @Body adv: LoginRequestBody): Response<LoginResponse>
+
+    @Headers("Content-Type: multipart/form-data")
+    @FormUrlEncoded
+    @POST("/v1/auth/register")
+    suspend fun  register( @Body a: RegisterRequestBody): Response<RegisterResponse>
 
     @GET("/v1/user/")
     suspend fun  getUser(): Response<User>
