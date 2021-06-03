@@ -12,13 +12,12 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.course.Course
-import com.kyrgyzbilim.ui.adapters.CourseAdapter
+import com.kyrgyzbilim.ui.adapters.CoursesAdapter
 import kotlinx.android.synthetic.main.fragment_courses.*
 
 class CoursesFragment : Fragment() {
 
-
-    private lateinit var adapter: CourseAdapter
+    private lateinit var adapter: CoursesAdapter
 
     private val courseViewModel: CourseViewModel by viewModels {
         InjectorObject.getCourseViewModelFactory()
@@ -52,13 +51,11 @@ class CoursesFragment : Fragment() {
                     recyclerCourse.visibility = View.GONE
                 }
             }
-
         }
-
     }
 
     private fun initList(courseList: List<Course>) {
-        adapter = CourseAdapter()
+        adapter = CoursesAdapter()
         recyclerCourse.adapter = adapter
         adapter.submitList(courseList)
         val layoutManager = LinearLayoutManager(activity)

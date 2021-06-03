@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,9 @@ import com.kyrgyzbilim.ui.courses.sections.SectionsFragmentDirections
 import kotlinx.android.synthetic.main.item_themes.view.*
 
 
-class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
-    private lateinit var items: List<Topic>
+class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
+    private  var items: List<Topic>? = null
+    private  var sectionType: String? = null
 
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Topic>() {
@@ -32,10 +34,10 @@ class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
 
     fun setData(
         items: List<Topic>?,
+        sectionType: String?
     ) {
-        if (items != null) {
             this.items = items
-        }
+            this.sectionType = sectionType
     }
 
     inner class ThemeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -45,10 +47,20 @@ class ThemesAdapter : ListAdapter<Topic, ThemesAdapter.ThemeViewHolder>(DIFF) {
             itemView.theme_title.text = currentTheme.name
 
             itemView.themeRV_item.setOnClickListener {
-                val action =
-                    SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment()
-                val nav = Navigation.findNavController(it)
+                val action = when (sectionType) {
+                    "Vocabulary" ->
+                        SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
+                    "Dialogs" ->
+                        SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(currentTheme.id,currentTheme.name, currentTheme.translated_name)
+                    "Texts" ->
+                        SectionsFragmentDirections.actionSectionsFragmentToTextFragment(currentTheme.id)
+                    "Grammar" ->
+                        SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(currentTheme.id, currentTheme.name, currentTheme.translated_name)
+                    else -> SectionsFragmentDirections.actionSectionsFragmentToErrorFragment()
 
+                }
+
+                val nav = Navigation.findNavController(it)
                 nav.navigate(action)
             }
         }

@@ -5,11 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
+import com.kyrgyzbilim.base.ApiResult
+import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.ui.adapters.GrammarAdapter
+import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
+import kotlinx.android.synthetic.main.fragment_grammar.*
 
 
 class GrammarFragment : Fragment() {
 
+    private val subTopicViewModel: SubTopicViewModel by viewModels {
+        InjectorObject.getSubTopicViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,5 +32,43 @@ class GrammarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var topicTranslatedName = "text"
+        var topicName = "text"
+        arguments?.let {
+            val args = GrammarFragmentArgs.fromBundle(it)
+            val topicId = args.id
+            topicName = args.name
+            topicTranslatedName = args.translatedName
+            subTopicViewModel.setTopic(topicId)
+        }
+
+        grammarTitle?.text = topicName
+        grammarTitleEn?.text = topicTranslatedName
+
+        val layoutManager = LinearLayoutManager(activity)
+        val adapter = GrammarAdapter()
+        recyclerGrammar.layoutManager = layoutManager
+        recyclerGrammar.adapter = adapter
+        subTopicViewModel.subTopic.observe(viewLifecycleOwner, {
+            when (it) {
+                is ApiResult.Success -> {
+                    grammar_progress_bar.visibility = View.GONE
+                    recyclerGrammar.visibility = View.VISIBLE
+                    adapter.setData(it.data)
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    grammar_progress_bar.visibility = View.GONE
+                    Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
+                }
+                is ApiResult.Loading -> {
+                    grammar_progress_bar.visibility = View.VISIBLE
+                }
+                else -> {
+                    grammar_progress_bar.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 }

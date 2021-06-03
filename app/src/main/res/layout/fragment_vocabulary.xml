@@ -1,51 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/backgraungDefault"
-    android:orientation="vertical"
-    tools:context=".ui.courses.sections.subtopics.vocabulary.VocabularyFragment">
-
+    android:background="@color/backgraungDefault"
+    tools:context=".ui.courses.sections.SectionsFragment">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="17dp"
+        android:layout_alignParentTop="true"
         android:fontFamily="sans-serif-medium"
         android:text="Vocabulary"
         android:textAllCaps="true"
+        android:layout_margin="10dp"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/vocabularyTheme"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="17dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="САЛАМ, АТЫӉ КИМ?"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/purple_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/vocabularyThemeEn"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Hi, What is your name?"
-        android:textColor="@color/darkMain"
-        android:textSize="16sp" />
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:context=".ui.courses.sections.subtopics.vocabulary.VocabularyFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="9dp"
-        tools:listitem="@layout/item_dialog" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/vocabularyTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="САЛАМ, АТЫӉ КИМ?"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="20dp" />
+
+            <TextView
+                android:id="@+id/vocabularyThemeEn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Hi, What is your name?"
+                android:textColor="@color/darkMain"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/vocabularyTheme" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerVocabulary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vocabularyThemeEn"
+                tools:listitem="@layout/item_dialog" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

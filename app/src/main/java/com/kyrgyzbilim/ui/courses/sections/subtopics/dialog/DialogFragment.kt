@@ -1,4 +1,4 @@
-package com.kyrgyzbilim.ui.courses.sections.subtopics.vocabulary
+package com.kyrgyzbilim.ui.courses.sections.subtopics.dialog
 
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +14,11 @@ import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
-import kotlinx.android.synthetic.main.fragment_vocabulary.*
-import kotlinx.android.synthetic.main.fragment_vocabulary.progress_bar
+import kotlinx.android.synthetic.main.fragment_dialog.*
+import kotlinx.android.synthetic.main.fragment_dialog.progress_bar
 
-class VocabularyFragment : Fragment() {
+class DialogFragment : Fragment() {
+
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }
@@ -30,7 +31,7 @@ class VocabularyFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_vocabulary, container, false)
+        return inflater.inflate(R.layout.fragment_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,22 +40,22 @@ class VocabularyFragment : Fragment() {
         var topicTranslatedName = "text"
         var topicName = "text"
         arguments?.let {
-            val args = VocabularyFragmentArgs.fromBundle(it)
+            val args = DialogFragmentArgs.fromBundle(it)
             val topicId = args.id
             topicName = args.name
             topicTranslatedName = args.translatedName
             subTopicViewModel.setTopic(topicId)
         }
 
-        vocabularyTheme.text = topicName
-        vocabularyThemeEn.text = topicTranslatedName
+        dialogTitle.text = topicName
+        dialogTitleEn.text = topicTranslatedName
 
 
-        subTopicViewModel.subTopic.observe(viewLifecycleOwner) {
+        subTopicViewModel.subTopic.observe(viewLifecycleOwner){
             when (it) {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
-                    recyclerVocabulary.visibility = View.VISIBLE
+                    recyclerDialog.visibility = View.VISIBLE
                     Log.e("Section Success", it.data.toString())
                     initList(it.data)
                 }
@@ -64,7 +65,7 @@ class VocabularyFragment : Fragment() {
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE
-                    recyclerVocabulary.visibility = View.GONE
+                    recyclerDialog.visibility = View.GONE
                 }
             }
         }
@@ -74,12 +75,14 @@ class VocabularyFragment : Fragment() {
 
     private fun initList(data: List<SubTopic>) {
         dialogVocabularyAdapter = DialogVocabularyAdapter(data)
-        recyclerVocabulary.adapter = dialogVocabularyAdapter
+        recyclerDialog.adapter = dialogVocabularyAdapter
         dialogVocabularyAdapter.submitList(data)
         val layoutManager = LinearLayoutManager(activity)
-        recyclerVocabulary.layoutManager = layoutManager
+        recyclerDialog.layoutManager = layoutManager
         dialogVocabularyAdapter.notifyDataSetChanged()
-        recyclerVocabulary.adapter = dialogVocabularyAdapter
+        recyclerDialog.adapter = dialogVocabularyAdapter
 
     }
+
+
 }

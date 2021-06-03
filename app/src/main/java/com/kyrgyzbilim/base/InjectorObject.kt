@@ -5,8 +5,11 @@ import com.kyrgyzbilim.data.remote.course.repository.CourseRepositoryImpl
 import com.kyrgyzbilim.data.remote.ServiceClient
 import com.kyrgyzbilim.data.remote.sections.SectionRepository
 import com.kyrgyzbilim.data.remote.sections.SectionRepositoryImpl
+import com.kyrgyzbilim.data.remote.subTopic.SubTopicRepository
+import com.kyrgyzbilim.data.remote.subTopic.SubTopicRepositoryImpl
 import com.kyrgyzbilim.ui.courses.CourseViewModelFactory
 import com.kyrgyzbilim.ui.courses.sections.SectionViewModelFactory
+import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModelFactory
 
 object InjectorObject {
 
@@ -17,6 +20,9 @@ object InjectorObject {
 
     private val sectionRepository: SectionRepository = SectionRepositoryImpl(serviceClient)
     fun getSectionViewModelFactory() = SectionViewModelFactory(sectionRepository)
+
+    private val subTopicRepository: SubTopicRepository = SubTopicRepositoryImpl(serviceClient)
+    fun getSubTopicViewModelFactory() = SubTopicViewModelFactory(subTopicRepository)
 
 
 
