@@ -74,13 +74,11 @@ class DialogFragment : Fragment() {
     }
 
     private fun initList(data: List<SubTopic>) {
-        dialogVocabularyAdapter = DialogVocabularyAdapter(data)
+        dialogVocabularyAdapter = DialogVocabularyAdapter()
         recyclerDialog.adapter = dialogVocabularyAdapter
-        dialogVocabularyAdapter.submitList(data)
         val layoutManager = LinearLayoutManager(activity)
         recyclerDialog.layoutManager = layoutManager
-        dialogVocabularyAdapter.notifyDataSetChanged()
-        recyclerDialog.adapter = dialogVocabularyAdapter
+        dialogVocabularyAdapter.submitList(data)
 
     }
 

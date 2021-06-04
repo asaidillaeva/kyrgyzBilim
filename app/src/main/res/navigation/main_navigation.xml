@@ -88,6 +88,14 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="null" />
+        <argument
+            android:name="transleted_name"
+            app:argType="string"
+            android:defaultValue="null" />
     </fragment>
     <fragment
         android:id="@+id/vocabularyFragment"

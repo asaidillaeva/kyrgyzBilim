@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.data.remote.subTopic.SubTopic
+import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.adapters.GrammarAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_grammar.*
@@ -21,6 +23,8 @@ class GrammarFragment : Fragment() {
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }
+
+    private lateinit var grammarAdapter: GrammarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +59,7 @@ class GrammarFragment : Fragment() {
                 is ApiResult.Success -> {
                     grammar_progress_bar.visibility = View.GONE
                     recyclerGrammar.visibility = View.VISIBLE
-                    adapter.setData(it.data)
+                    initList(it.data)
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
@@ -70,5 +74,14 @@ class GrammarFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun initList(data: List<SubTopic>) {
+        grammarAdapter = GrammarAdapter()
+        recyclerGrammar.adapter = grammarAdapter
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerGrammar.layoutManager = layoutManager
+        grammarAdapter.submitList(data)
+
     }
 }

@@ -73,13 +73,11 @@ class VocabularyFragment : Fragment() {
     }
 
     private fun initList(data: List<SubTopic>) {
-        dialogVocabularyAdapter = DialogVocabularyAdapter(data)
+        dialogVocabularyAdapter = DialogVocabularyAdapter()
         recyclerVocabulary.adapter = dialogVocabularyAdapter
-        dialogVocabularyAdapter.submitList(data)
         val layoutManager = LinearLayoutManager(activity)
         recyclerVocabulary.layoutManager = layoutManager
-        dialogVocabularyAdapter.notifyDataSetChanged()
-        recyclerVocabulary.adapter = dialogVocabularyAdapter
+        dialogVocabularyAdapter.submitList(data)
 
     }
 }

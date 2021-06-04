@@ -12,10 +12,8 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import kotlinx.android.synthetic.main.item_dialog.view.*
 
-class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
-) : ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
+class DialogVocabularyAdapter : ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
 
-    private lateinit var context: Context
 
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<SubTopic>() {
@@ -35,8 +33,8 @@ class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 
-            itemView.dialog.text = currentSection.name
-            itemView.translationDialog.text = currentSection.translated_name
+            itemView.dialog.text = currentSection.text
+            itemView.translationDialog.text = currentSection.translated_text
 
         }
     }
@@ -44,7 +42,6 @@ class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicViewHolder {
-        context = parent.context;
         return SubTopicViewHolder(
             LayoutInflater
                 .from(parent.context)
@@ -56,8 +53,5 @@ class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
         holder.onBind(position)
     }
 
-    fun getItemAtPos(position: Int): SubTopic {
-        return getItem(position)
-    }
 
 }
