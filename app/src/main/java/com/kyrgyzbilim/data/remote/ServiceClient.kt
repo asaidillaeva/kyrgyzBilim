@@ -44,15 +44,15 @@ interface ServiceClient {
     suspend fun listCategories(): Response<RegisterResponse>
 
     @POST("/v1/auth/login")
-    suspend fun  login( @Body adv: LoginRequestBody): Response<LoginResponse>
+    suspend fun  login( @Body adv: LoginRequestBody): LoginResponse
 
     @Headers("Content-Type: multipart/form-data")
     @FormUrlEncoded
     @POST("/v1/auth/register")
-    suspend fun  register( @Body a: RegisterRequestBody): Response<RegisterResponse>
+    suspend fun  register( @Body a: RegisterRequestBody): RegisterResponse
 
     @GET("/v1/user/")
-    suspend fun  getUser(): Response<User>
+    suspend fun  getUser(): User
 
     @GET("/v1/courses")
     suspend fun  getCourses(): List<Course>
