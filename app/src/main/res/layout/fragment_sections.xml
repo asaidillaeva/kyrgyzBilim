@@ -51,7 +51,7 @@
                 android:layout_marginStart="32dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:letterSpacing="0.04"
-                android:text="Greetings"
+                android:text="Sections"
                 android:textAllCaps="true"
                 android:textColor="@color/darkWhite"
                 android:textSize="18sp" />

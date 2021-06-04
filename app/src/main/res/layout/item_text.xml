@@ -12,6 +12,7 @@
         android:layout_margin="10dp"
         android:text="Сабакка чыгып жатканда алгач китеп кабыңызды текшериңиз. Китеп кабыңызга китеп, дептер, калем сап, телефон жана ачкычтарды салыңыз. Эң башкысы капчыгыңызды унутпаңыз, анткени сизге керектүү акча каражатыңыз ал жерде сакталуу жана автобуска жол кире төлөйсүз. "
         android:textSize="15sp"
+        android:padding="5dp"
         android:lineSpacingExtra="0.05dp"
         android:textColor="@color/black"/>
 </LinearLayout>
