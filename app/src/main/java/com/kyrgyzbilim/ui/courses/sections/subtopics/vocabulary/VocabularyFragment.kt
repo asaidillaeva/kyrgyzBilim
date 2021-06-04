@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.vocabulary
 
+import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class VocabularyFragment : Fragment() {
         InjectorObject.getSubTopicViewModelFactory()
     }
     private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
+
 
 
     override fun onCreateView(
@@ -78,6 +80,8 @@ class VocabularyFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         recyclerVocabulary.layoutManager = layoutManager
         dialogVocabularyAdapter.submitList(data)
+        dialogVocabularyAdapter.setData(context)
+
 
     }
 }
