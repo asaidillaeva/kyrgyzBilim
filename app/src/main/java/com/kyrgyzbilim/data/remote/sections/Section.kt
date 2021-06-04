@@ -7,9 +7,7 @@ class Section(
     val name: String,
 //    val icon: Int,
     val type: String,
-    val topics: List<Topic>
     val topics: List<Topic>,
-    val type: String
 ) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
