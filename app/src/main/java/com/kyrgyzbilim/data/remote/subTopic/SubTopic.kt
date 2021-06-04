@@ -2,15 +2,14 @@ package com.kyrgyzbilim.data.remote.subTopic
 
 data class SubTopic(
     val id: Int = 0,
-    val body: String = "",
-    val name: String = "",
-    val translated_name: String = "",
-    val icon: String = " ",
+    val text: String = "",
+    val translated_text: String = "",
     val audio: String = "",
+    val image: String = " ",
     val type: String = ""
 ) {
 
     override fun toString(): String {
-        return "SubTopic(id=$id, name='$name', translated_name='$translated_name', icon='$icon', audio='$audio', type='$type')"
+        return "SubTopic(id=$id, name='$text', translated_name='$translated_text', icon='$image', audio='$audio', type='$type')"
     }
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.TextAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_text.*
@@ -21,6 +22,8 @@ class TextFragment : Fragment() {
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }
+
+    private lateinit var textAdapter: TextAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +41,13 @@ class TextFragment : Fragment() {
         arguments?.let {
             val args = TextFragmentArgs.fromBundle(it)
             val topicId = args.id
-//            topicName = args.name
-//            topicTranslatedName = args.translatedName
+            topicName = args.name
+            topicTranslatedName = args.transletedName
             subTopicViewModel.setTopic(topicId)
         }
 
-//        textTitle?.text = topicName
-//        textTitleEn?.text = topicTranslatedName
+        textTitle?.text = topicName
+        textTitleEn?.text = topicTranslatedName
 
 
         val layoutManager = LinearLayoutManager(activity)
@@ -56,7 +59,7 @@ class TextFragment : Fragment() {
                 is ApiResult.Success -> {
                     text_progress_bar.visibility = View.GONE
                     recyclerText.visibility = View.VISIBLE
-                    adapter.setData(it.data)
+                    initList(it.data)
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
@@ -71,5 +74,14 @@ class TextFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun initList(data: List<SubTopic>) {
+        textAdapter = TextAdapter()
+        recyclerText.adapter = textAdapter
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerText.layoutManager = layoutManager
+        textAdapter.submitList(data)
+
     }
 }
