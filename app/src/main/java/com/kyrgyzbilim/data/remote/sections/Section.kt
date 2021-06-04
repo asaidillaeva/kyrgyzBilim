@@ -8,6 +8,8 @@ class Section(
 //    val icon: Int,
     val type: String,
     val topics: List<Topic>
+    val topics: List<Topic>,
+    val type: String
 ) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
@@ -16,4 +18,6 @@ class Section(
     override fun toString(): String {
         return "Section(id=$id, name='$name', type='$type', topics=$topics)"
     }
+
+
 }
