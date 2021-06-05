@@ -65,41 +65,34 @@ class DialogVocabularyAdapter :
 //                mediaPlayer.start()
 //
 //            }
+            var event = false
+            itemView.setOnClickListener {
+                event = true
+                val myUri: Uri = Uri.parse(currentSection.audio)
+                val mediaPlayer = MediaPlayer().apply {
+                    setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .build()
+                    )
+                    context?.let { it1 -> setDataSource(it1, myUri) }
 
-            itemView.setOnTouchListener { _, event ->
-                Log.e("sound", "clicked")
-                handleTouch(event, currentSection.audio)
-                true
+                }
+                event = if (event) {
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
+                    false
+                } else {
+                    mediaPlayer.pause()
+                    mediaPlayer.seekTo(0)
+                    true
 
+                }
             }
         }
     }
 
-    private fun handleTouch(event: MotionEvent?, audio: String) {
-        val myUri: Uri = Uri.parse(audio)
-        val mediaPlayer = MediaPlayer().apply {
-            setAudioAttributes(
-                AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .build()
-            )
-            context?.let { it1 -> setDataSource(it1, myUri) }
-
-        }
-        when(event?.action){
-            MotionEvent.ACTION_DOWN ->{
-                mediaPlayer.prepare()
-                mediaPlayer.start()
-            }
-            MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP ->{
-                mediaPlayer.pause()
-                mediaPlayer.seekTo(0)
-            }
-
-        }
-
-    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicViewHolder {
