@@ -7,6 +7,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -46,25 +47,58 @@ class DialogVocabularyAdapter :
             itemView.dialog.text = currentSection.text
             itemView.translationDialog.text = currentSection.translated_text
 
-            itemView.setOnClickListener {
+//            itemView.setOnClickListener {
+//                Log.e("sound", "clicked")
+//
+//                val myUri: Uri = Uri.parse(currentSection.audio)
+//                val mediaPlayer = MediaPlayer().apply {
+//                    setAudioAttributes(
+//                        AudioAttributes.Builder()
+//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+//                            .setUsage(AudioAttributes.USAGE_MEDIA)
+//                            .build()
+//                    )
+//                    context?.let { it1 -> setDataSource(it1, myUri) }
+//
+//                }
+//                mediaPlayer.prepare()
+//                mediaPlayer.start()
+//
+//            }
+
+            itemView.setOnTouchListener { _, event ->
                 Log.e("sound", "clicked")
-
-                val myUri: Uri = Uri.parse(currentSection.audio)
-                val mediaPlayer = MediaPlayer().apply {
-                    setAudioAttributes(
-                        AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
-                            .build()
-                    )
-                    context?.let { it1 -> setDataSource(it1, myUri) }
-
-                }
-                mediaPlayer.prepare()
-                mediaPlayer.start()
+                handleTouch(event, currentSection.audio)
+                true
 
             }
         }
+    }
+
+    private fun handleTouch(event: MotionEvent?, audio: String) {
+        val myUri: Uri = Uri.parse(audio)
+        val mediaPlayer = MediaPlayer().apply {
+            setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .build()
+            )
+            context?.let { it1 -> setDataSource(it1, myUri) }
+
+        }
+        when(event?.action){
+            MotionEvent.ACTION_DOWN ->{
+                mediaPlayer.prepare()
+                mediaPlayer.start()
+            }
+            MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP ->{
+                mediaPlayer.pause()
+                mediaPlayer.seekTo(0)
+            }
+
+        }
+
     }
 
 
