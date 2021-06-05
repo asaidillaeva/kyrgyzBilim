@@ -19,7 +19,7 @@ object InjectorObject {
     private val serviceClient = ServiceClient()
 
     private val coursesRepository: CourseRepository = CourseRepositoryImpl(serviceClient)
-    fun getCourseViewModelFactory() = CourseViewModelFactory(coursesRepository)
+    fun getCourseViewModelFactory() = CourseViewModelFactory(coursesRepository, userRepository)
 
     private val sectionRepository: SectionRepository = SectionRepositoryImpl(serviceClient)
     fun getSectionViewModelFactory() = SectionViewModelFactory(sectionRepository)

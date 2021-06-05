@@ -56,8 +56,8 @@ interface ServiceClient {
         @Part("password") password: String,
         ): RegisterResponse
 
-    @GET("/v1/user/")
-    suspend fun  getUser(): User
+    @GET("/v1/user")
+    suspend fun  getUser(@Header("Authorization") bearerToken: String): User
 
     @GET("/v1/courses")
     suspend fun  getCourses(): List<Course>

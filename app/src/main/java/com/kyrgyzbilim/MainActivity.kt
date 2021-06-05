@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             Thread {
                 Thread.sleep(500)
                 finish()
-
             }.start()
         }
     }

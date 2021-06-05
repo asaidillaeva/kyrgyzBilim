@@ -68,7 +68,23 @@ class CoursesFragment : Fragment() {
             true
         }
 
+        val token = UserData.of(requireContext()).getToken()
 
+        if (token != null || token != "") {
+            courseViewModel.user(token!!).observe(viewLifecycleOwner){
+                when (it) {
+                    is ApiResult.Success -> {
+                        user_name.text = "${it.data.first_name} ${it.data.last_name}"
+                    }
+                    is ApiResult.Error -> {
+                        user_name.text = "error while loading user info"
+                    }
+                    is ApiResult.Loading -> {
+                        user_name.text = "loading user info..."
+                    }
+                }
+            }
+        }
     }
 
     private fun initList(courseList: List<Course>) {
