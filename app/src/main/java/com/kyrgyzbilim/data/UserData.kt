@@ -11,7 +11,7 @@ class UserData(var context: Context){
 
     fun getToken(): String? {
         val myPrefs = context.getSharedPreferences(prefsNode, Context.MODE_PRIVATE)
-        return myPrefs.getString(tokenNode, null)
+        return myPrefs.getString(tokenNode, "")
     }
 
     fun saveToken(token: String){

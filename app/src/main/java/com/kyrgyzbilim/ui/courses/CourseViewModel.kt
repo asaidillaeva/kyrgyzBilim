@@ -3,9 +3,11 @@ package com.kyrgyzbilim.ui.courses
 import androidx.lifecycle.*
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.data.remote.course.repository.CourseRepository
+import com.kyrgyzbilim.data.remote.user.repository.UserRepository
 
 class CourseViewModel (
-    private val courseRepository: CourseRepository
+    private val courseRepository: CourseRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private lateinit var state: SavedStateHandle
@@ -24,6 +26,9 @@ class CourseViewModel (
         emit(result)
     }
 
-
-
+    fun user(token: String) = liveData {
+        emit(ApiResult.Loading)
+        val result = userRepository.info(token)
+        emit(result)
+    }
 }

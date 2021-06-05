@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,11 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import kotlinx.android.synthetic.main.item_grammar.view.*
 
-class GrammarAdapter : ListAdapter<SubTopic, GrammarAdapter.SubTopicHolder>(DIFF) {
-    private  var items: List<SubTopic>? = null
+class GrammarAdapter : ListAdapter<SubTopic, GrammarAdapter.SubTopicViewHolder>(DIFF) {
+
+
     companion object {
-        val DIFF = object : DiffUtil.ItemCallback<SubTopic>() {
+        private val DIFF = object : DiffUtil.ItemCallback<SubTopic>() {
             override fun areItemsTheSame(oldItem: SubTopic, newItem: SubTopic): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -25,27 +27,24 @@ class GrammarAdapter : ListAdapter<SubTopic, GrammarAdapter.SubTopicHolder>(DIFF
         }
     }
 
-    fun setData(
-        items: List<SubTopic>?
-    ) {
-        this.items = items
-    }
 
-    inner class SubTopicHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SubTopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun onBind(position: Int) {
-            val item = items?.get(position)
-            itemView.grammarTitle.text = item?.name
-            itemView.grammarTitleEn.text = item?.translated_name
+            val currentSection = getItem(position)
+
+//            itemView.grammarTitle.text = item?.text
+//            itemView.grammarTitleEn.text = item?.translated_text
+            itemView.textBody.text = currentSection?.text
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicHolder{
-        return SubTopicHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicViewHolder{
+        return SubTopicViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_grammar, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: SubTopicHolder, position: Int) {
-        holder.onBind(position)
+    override fun onBindViewHolder(viewHolder: SubTopicViewHolder, position: Int) {
+        viewHolder.onBind(position)
     }
 }

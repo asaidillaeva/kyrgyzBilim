@@ -1,11 +1,13 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.dialog
 
+import android.content.Context
+import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
@@ -15,7 +17,6 @@ import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_dialog.*
-import kotlinx.android.synthetic.main.fragment_dialog.progress_bar
 
 class DialogFragment : Fragment() {
 
@@ -51,6 +52,7 @@ class DialogFragment : Fragment() {
         dialogTitleEn.text = topicTranslatedName
 
 
+
         subTopicViewModel.subTopic.observe(viewLifecycleOwner){
             when (it) {
                 is ApiResult.Success -> {
@@ -74,15 +76,15 @@ class DialogFragment : Fragment() {
     }
 
     private fun initList(data: List<SubTopic>) {
-        dialogVocabularyAdapter = DialogVocabularyAdapter(data)
+        dialogVocabularyAdapter = DialogVocabularyAdapter()
         recyclerDialog.adapter = dialogVocabularyAdapter
-        dialogVocabularyAdapter.submitList(data)
         val layoutManager = LinearLayoutManager(activity)
         recyclerDialog.layoutManager = layoutManager
-        dialogVocabularyAdapter.notifyDataSetChanged()
-        recyclerDialog.adapter = dialogVocabularyAdapter
+        dialogVocabularyAdapter.submitList(data)
+        dialogVocabularyAdapter.setData(context)
 
     }
+
 
 
 }

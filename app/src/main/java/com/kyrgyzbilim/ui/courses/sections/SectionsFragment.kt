@@ -11,9 +11,7 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
 import com.kyrgyzbilim.data.remote.sections.Section
-import com.kyrgyzbilim.data.remote.topic.Topic
 import com.kyrgyzbilim.ui.adapters.SectionAdapter
-import com.kyrgyzbilim.ui.adapters.TopicAdapter
 import kotlinx.android.synthetic.main.fragment_sections.*
 
 
@@ -45,9 +43,7 @@ class SectionsFragment : Fragment() {
     }
 
 
-    fun getSection() {
-        val topicListIn: List<Topic>? = null
-
+    private fun getSection() {
         sectionViewModel.section.observe(viewLifecycleOwner) { that ->
             when (that) {
                 is ApiResult.Success -> {

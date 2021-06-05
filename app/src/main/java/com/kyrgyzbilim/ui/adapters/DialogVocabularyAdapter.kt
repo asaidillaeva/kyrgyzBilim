@@ -2,6 +2,10 @@ package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +16,10 @@ import com.kyrgyzbilim.R
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import kotlinx.android.synthetic.main.item_dialog.view.*
 
-class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
-) : ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
+class DialogVocabularyAdapter :
+    ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
 
-    private lateinit var context: Context
+    var context: Context? = null
 
     companion object {
         private val DIFF = object : DiffUtil.ItemCallback<SubTopic>() {
@@ -29,22 +33,42 @@ class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
         }
     }
 
+    fun setData(context: Context?) {
+        this.context = context
+    }
+
     inner class SubTopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        @SuppressLint("ResourceAsColor")
+        @SuppressLint("ResourceAsColor", "ClickableViewAccessibility")
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 
-            itemView.dialog.text = currentSection.name
-            itemView.translationDialog.text = currentSection.translated_name
+            itemView.dialog.text = currentSection.text
+            itemView.translationDialog.text = currentSection.translated_text
 
+            itemView.setOnClickListener {
+                Log.e("sound", "clicked")
+
+                val myUri: Uri = Uri.parse(currentSection.audio)
+                val mediaPlayer = MediaPlayer().apply {
+                    setAudioAttributes(
+                        AudioAttributes.Builder()
+                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .build()
+                    )
+                    context?.let { it1 -> setDataSource(it1, myUri) }
+
+                }
+                mediaPlayer.prepare()
+                mediaPlayer.start()
+
+            }
         }
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicViewHolder {
-        context = parent.context;
         return SubTopicViewHolder(
             LayoutInflater
                 .from(parent.context)
@@ -56,8 +80,6 @@ class DialogVocabularyAdapter (private var subTopicList: List<SubTopic>?
         holder.onBind(position)
     }
 
-    fun getItemAtPos(position: Int): SubTopic {
-        return getItem(position)
-    }
+
 
 }

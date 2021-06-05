@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="4dp"
-    android:padding="5dp"
+    android:backgroundTint="@color/white"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/listenDialog"
+        app:layout_constraintEnd_toStartOf="@+id/listenAudio"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,37 +23,39 @@
             android:id="@+id/dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="-Саламатсызбы!"
+            tools:text="-Саламатсызбы!СаламатсызбыСаламатсызбы fd"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/listenDialog"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/listenAudio"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginEnd="40dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/translationDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
             android:text="-Hello!"
             android:textColor="@color/darkMain"
-            android:textSize="16sp"
-            android:layout_marginEnd="40dp"
+            android:textSize="15sp"
+            android:ellipsize="none"
+            android:scrollHorizontally="false"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/listenDialog"
+            app:layout_constraintEnd_toStartOf="@+id/listenAudio"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dialog" />
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/listenDialog"
+        android:id="@+id/listenAudio"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_margin="5dp"
         android:layout_gravity="center_vertical|end"
+        android:layout_margin="5dp"
         android:src="@drawable/ic_listen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
