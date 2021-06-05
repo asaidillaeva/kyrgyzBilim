@@ -5,7 +5,7 @@ import com.kyrgyzbilim.data.remote.topic.Topic
 class Section(
     val id: Int,
     val name: String,
-//    val icon: Int,
+    val icon: String,
     val type: String,
     val topics: List<Topic>,
 ) {
@@ -14,7 +14,7 @@ class Section(
     }
 
     override fun toString(): String {
-        return "Section(id=$id, name='$name', type='$type', topics=$topics)"
+        return "Section(id=$id, name='$name', icon='$icon', type='$type', topics=$topics)"
     }
 
 
