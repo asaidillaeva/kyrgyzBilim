@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.data.UserData
 import com.kyrgyzbilim.data.remote.course.Course
 import com.kyrgyzbilim.ui.adapters.CoursesAdapter
+import com.kyrgyzbilim.ui.authorization.AuthActivity
 import kotlinx.android.synthetic.main.fragment_courses.*
+import kotlin.concurrent.thread
 
 class CoursesFragment : Fragment() {
 
@@ -52,6 +56,19 @@ class CoursesFragment : Fragment() {
                 }
             }
         }
+
+        user_name.setOnLongClickListener {
+            UserData.of(requireContext()).saveToken("")
+            startActivity(Intent(activity, AuthActivity::class.java))
+            thread {
+                Thread.sleep(500)
+                activity?.finish()
+            }
+
+            true
+        }
+
+
     }
 
     private fun initList(courseList: List<Course>) {
@@ -62,7 +79,5 @@ class CoursesFragment : Fragment() {
         recyclerCourse.layoutManager = layoutManager
         adapter.notifyDataSetChanged()
         recyclerCourse.adapter = adapter
-
     }
-
 }

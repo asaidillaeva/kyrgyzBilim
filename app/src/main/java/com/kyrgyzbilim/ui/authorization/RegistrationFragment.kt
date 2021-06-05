@@ -1,6 +1,7 @@
 package com.kyrgyzbilim.ui.authorization
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,11 +37,34 @@ class RegistrationFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-        view.sign_in_button.setOnClickListener {
+        view.sign_up_button.setOnClickListener {
             val firstName = first_name_edit_text.text.toString()
             val lastName = last_name_edit_text.text.toString()
             val phoneNumber = phone_number_edit_text.text.toString()
             val pass = password_edit_text.text.toString()
+            val pass2 = repeat_password_edit_text.text.toString()
+
+
+            // validate data
+            var error = ""
+
+            if( firstName.length < 3){
+                error = "field Name could not be less than 3"
+            }
+
+            if( lastName.length < 3){
+                error = "field Last Name could not be less than 3"
+            }
+
+            if( pass != pass2){
+                error = "passwords are not same"
+            }
+
+            if(error != ""){
+                Toast.makeText(requireContext(), "Error: $error", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             authViewModel.userRegisterData = RegisterRequestBody(
                 firstName, lastName, phoneNumber, pass
             )
@@ -55,6 +79,7 @@ class RegistrationFragment : Fragment() {
                         it.throwable.message.toString()
                         Toast.makeText(activity, "Error ",  Toast.LENGTH_SHORT).show()
                         register_progress_bar.visibility = View.GONE
+                        Log.d("tilek", it.throwable.localizedMessage?.toString() + "")
                     }
                     is ApiResult.Loading -> {
                         register_progress_bar.visibility = View.VISIBLE

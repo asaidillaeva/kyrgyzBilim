@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
                 when (it) {
                     is ApiResult.Success -> {
                         login_progress_bar.visibility = View.GONE
-                        Toast.makeText(activity, "success " + it.data.access_token,  Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "success ",  Toast.LENGTH_SHORT).show()
                         startActivity(Intent(activity, MainActivity::class.java))
                         com.kyrgyzbilim.data.UserData.of(requireContext()).saveToken(it.data.access_token.toString())
                         Thread{

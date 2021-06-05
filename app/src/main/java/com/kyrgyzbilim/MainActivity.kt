@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         // checking login
         val token = UserData.of(this).getToken()
 
-        if(token == null){
+        if(token == null || token == ""){
             // not logged in
             startActivity(Intent(this, AuthActivity::class.java))
             Thread {
