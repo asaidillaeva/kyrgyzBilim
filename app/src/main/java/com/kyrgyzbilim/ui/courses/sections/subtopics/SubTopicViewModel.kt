@@ -1,10 +1,9 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.kyrgyzbilim.base.ApiResult
-import com.kyrgyzbilim.data.remote.subTopic.SubTopicRepository
+import com.kyrgyzbilim.data.remote.subTopic.repository.SubTopicRepository
 
 class SubTopicViewModel(
     private val subTopicRepository: SubTopicRepository

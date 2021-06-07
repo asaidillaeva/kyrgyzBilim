@@ -37,11 +37,8 @@ class SectionsFragment : Fragment() {
             val courseId = SectionsFragmentArgs.fromBundle(it).sectionId
             sectionViewModel.setCourseId(courseId)
         }
-
         getSection()
-
     }
-
 
     private fun getSection() {
         sectionViewModel.section.observe(viewLifecycleOwner) { that ->
@@ -62,8 +59,6 @@ class SectionsFragment : Fragment() {
                     recyclerSection.visibility = View.GONE
                 }
             }
-
-
         }
     }
 

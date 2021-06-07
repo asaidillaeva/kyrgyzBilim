@@ -48,33 +48,35 @@ class DialogVocabularyAdapter :
             itemView.translationDialog.text = currentSection.translated_text
 
             var event = false
+            var medPlr: MediaPlayer? = null
             itemView.setOnClickListener {
                 if(currentSection.audio != null ){
                     event = true
                     val myUri: Uri = Uri.parse(currentSection.audio)
-                    val mediaPlayer = MediaPlayer().apply {
-                        setAudioAttributes(
-                            AudioAttributes.Builder()
-                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                                .setUsage(AudioAttributes.USAGE_MEDIA)
-                                .build()
-                        )
-                        context?.let { it1 -> setDataSource(it1, myUri) }
-
+                    if (medPlr == null){
+                        medPlr = MediaPlayer().apply {
+                            setAudioAttributes(
+                                AudioAttributes.Builder()
+                                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                                    .build()
+                            )
+                            context?.let { it1 -> setDataSource(it1, myUri) }
+                        }
+                        medPlr?.prepare()
                     }
                     event = if (event) {
-                        mediaPlayer.prepare()
-                        mediaPlayer.start()
+                        medPlr?.start()
+                        medPlr?.setOnCompletionListener {
+                            event = true
+                        }
                         false
                     } else {
-                        mediaPlayer.pause()
-                        mediaPlayer.seekTo(0)
+                        medPlr?.pause()
+                        medPlr?.seekTo(0)
                         true
-
                     }
                 }
-
-
             }
         }
     }
@@ -92,7 +94,4 @@ class DialogVocabularyAdapter :
     override fun onBindViewHolder(holder: SubTopicViewHolder, position: Int) {
         holder.onBind(position)
     }
-
-
-
 }

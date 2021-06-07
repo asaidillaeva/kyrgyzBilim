@@ -2,7 +2,7 @@ package com.kyrgyzbilim.ui.courses.sections.subtopics
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kyrgyzbilim.data.remote.subTopic.SubTopicRepository
+import com.kyrgyzbilim.data.remote.subTopic.repository.SubTopicRepository
 
 class SubTopicViewModelFactory(
     private val subTopicRepository: SubTopicRepository
