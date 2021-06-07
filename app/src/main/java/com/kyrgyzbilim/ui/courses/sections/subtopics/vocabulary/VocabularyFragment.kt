@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.vocabulary
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class VocabularyFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_vocabulary, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,7 +50,9 @@ class VocabularyFragment : Fragment() {
         }
 
         vocabularyTheme.text = topicName
-        vocabularyThemeEn.text = topicTranslatedName
+        if (topicTranslatedName.isNotEmpty()) {
+            vocabularyThemeEn.text = "/$topicTranslatedName"
+        }
 
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner) {

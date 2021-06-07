@@ -47,48 +47,34 @@ class DialogVocabularyAdapter :
             itemView.dialog.text = currentSection.text
             itemView.translationDialog.text = currentSection.translated_text
 
-//            itemView.setOnClickListener {
-//                Log.e("sound", "clicked")
-//
-//                val myUri: Uri = Uri.parse(currentSection.audio)
-//                val mediaPlayer = MediaPlayer().apply {
-//                    setAudioAttributes(
-//                        AudioAttributes.Builder()
-//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                            .setUsage(AudioAttributes.USAGE_MEDIA)
-//                            .build()
-//                    )
-//                    context?.let { it1 -> setDataSource(it1, myUri) }
-//
-//                }
-//                mediaPlayer.prepare()
-//                mediaPlayer.start()
-//
-//            }
             var event = false
             itemView.setOnClickListener {
-                event = true
-                val myUri: Uri = Uri.parse(currentSection.audio)
-                val mediaPlayer = MediaPlayer().apply {
-                    setAudioAttributes(
-                        AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
-                            .build()
-                    )
-                    context?.let { it1 -> setDataSource(it1, myUri) }
+                if(currentSection.audio != null ){
+                    event = true
+                    val myUri: Uri = Uri.parse(currentSection.audio)
+                    val mediaPlayer = MediaPlayer().apply {
+                        setAudioAttributes(
+                            AudioAttributes.Builder()
+                                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                .setUsage(AudioAttributes.USAGE_MEDIA)
+                                .build()
+                        )
+                        context?.let { it1 -> setDataSource(it1, myUri) }
 
-                }
-                event = if (event) {
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-                    false
-                } else {
-                    mediaPlayer.pause()
-                    mediaPlayer.seekTo(0)
-                    true
+                    }
+                    event = if (event) {
+                        mediaPlayer.prepare()
+                        mediaPlayer.start()
+                        false
+                    } else {
+                        mediaPlayer.pause()
+                        mediaPlayer.seekTo(0)
+                        true
 
+                    }
                 }
+
+
             }
         }
     }

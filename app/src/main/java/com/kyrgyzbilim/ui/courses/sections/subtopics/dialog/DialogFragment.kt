@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.dialog
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
@@ -35,6 +36,7 @@ class DialogFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_dialog, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,8 +51,9 @@ class DialogFragment : Fragment() {
         }
 
         dialogTitle.text = topicName
-        dialogTitleEn.text = topicTranslatedName
-
+        if (topicTranslatedName.isNotEmpty()) {
+            dialogTitleEn.text = "/$topicTranslatedName"
+        }
 
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner){

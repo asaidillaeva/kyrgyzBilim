@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.text
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,6 +34,7 @@ class TextFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_text, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,7 +49,9 @@ class TextFragment : Fragment() {
         }
 
         textTitle?.text = topicName
-        textTitleEn?.text = topicTranslatedName
+        if (topicTranslatedName.isNotEmpty()){
+            textTitleEn?.text = "/$topicTranslatedName"
+        }
 
 
         val layoutManager = LinearLayoutManager(activity)

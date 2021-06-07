@@ -1,5 +1,6 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.grammar
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +35,7 @@ class GrammarFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_grammar, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,7 +50,9 @@ class GrammarFragment : Fragment() {
         }
 
         grammarTitle?.text = topicName
-        grammarTitleEn?.text = topicTranslatedName
+        if (topicTranslatedName.isNotEmpty()) {
+            grammarTitleEn?.text = "/$topicTranslatedName"
+        }
 
         val layoutManager = LinearLayoutManager(activity)
         val adapter = GrammarAdapter()
