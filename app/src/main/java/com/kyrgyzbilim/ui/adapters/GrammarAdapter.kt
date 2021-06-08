@@ -34,7 +34,7 @@ class GrammarAdapter : ListAdapter<SubTopic, GrammarAdapter.SubTopicViewHolder>(
 
 //            itemView.grammarTitle.text = item?.text
 //            itemView.grammarTitleEn.text = item?.translated_text
-            itemView.textBody.text = currentSection?.text
+            itemView.textBody.text = currentSection?.name
         }
     }
 

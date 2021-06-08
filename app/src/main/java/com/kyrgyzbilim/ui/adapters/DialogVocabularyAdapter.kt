@@ -44,8 +44,8 @@ class DialogVocabularyAdapter :
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 
-            itemView.dialog.text = currentSection.text
-            itemView.translationDialog.text = currentSection.translated_text
+            itemView.dialog.text = currentSection.name
+            itemView.translationDialog.text = currentSection.translated_name
 
             var event = false
             var medPlr: MediaPlayer? = null

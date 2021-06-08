@@ -31,7 +31,7 @@ class TextAdapter : ListAdapter<SubTopic, TextAdapter.SubTopicHolder>(DIFF) {
             val currentSection = getItem(position)
 //            itemView.textTitle.text = item?.text
 //            itemView.textTitleEn.text = item?.translated_text
-            itemView.textBody.text = currentSection?.text
+            itemView.textBody.text = currentSection?.name
         }
     }
 
