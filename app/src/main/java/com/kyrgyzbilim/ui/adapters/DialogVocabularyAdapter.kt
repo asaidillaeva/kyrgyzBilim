@@ -50,7 +50,7 @@ class DialogVocabularyAdapter :
             var event = false
             var medPlr: MediaPlayer? = null
             itemView.setOnClickListener {
-                if(currentSection.audio != null ){
+                if(!currentSection.audio.isNullOrEmpty()){
                     event = true
                     val myUri: Uri = Uri.parse(currentSection.audio)
                     if (medPlr == null){
@@ -80,8 +80,6 @@ class DialogVocabularyAdapter :
             }
         }
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubTopicViewHolder {
         return SubTopicViewHolder(
