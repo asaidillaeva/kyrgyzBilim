@@ -39,7 +39,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/grammarTitle"
@@ -56,8 +56,7 @@
                     android:id="@+id/grammarTitleEn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:layout_toEndOf="@id/dialogTitle"
+                    android:layout_marginStart="23dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Greetings"
                     android:textColor="@color/darkMain"
