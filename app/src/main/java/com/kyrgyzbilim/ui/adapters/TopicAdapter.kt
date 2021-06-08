@@ -44,7 +44,7 @@ class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
         fun onBind(position: Int) {
             val currentTheme = getItem(position)
 
-            itemView.theme_title.text = currentTheme.name
+            itemView.theme_title.text = currentTheme.translated_name
 
             itemView.themeRV_item.setOnClickListener {
                 val action = when (sectionType) {

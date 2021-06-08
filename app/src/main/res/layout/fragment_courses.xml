@@ -63,7 +63,7 @@
                                 android:id="@+id/user_avatar"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@drawable/avatar_ex" />
+                                android:src="@drawable/ic_user" />
 
                             <TextView
                                 android:id="@+id/user_name"
