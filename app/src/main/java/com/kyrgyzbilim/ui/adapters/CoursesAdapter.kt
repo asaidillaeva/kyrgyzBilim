@@ -14,7 +14,7 @@ import com.kyrgyzbilim.data.remote.course.Course
 import com.kyrgyzbilim.ui.courses.CoursesFragmentDirections
 import kotlinx.android.synthetic.main.item_courses.view.*
 
-class CoursesAdapter() : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF) {
+class CoursesAdapter : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF) {
 
     private lateinit var context: Context
 

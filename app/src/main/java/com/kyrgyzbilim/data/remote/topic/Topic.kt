@@ -1,6 +1,5 @@
 package com.kyrgyzbilim.data.remote.topic
 
-import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 
 class Topic(
     val id: Int,
