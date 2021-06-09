@@ -25,13 +25,12 @@ class TextAdapter : ListAdapter<SubTopic, TextAdapter.SubTopicHolder>(DIFF) {
         }
     }
 
-
     inner class SubTopicHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 //            itemView.textTitle.text = item?.text
 //            itemView.textTitleEn.text = item?.translated_text
-            itemView.textBody.text = currentSection?.name
+            itemView.textBody.text = currentSection?.text
         }
     }
 

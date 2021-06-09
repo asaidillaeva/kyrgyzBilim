@@ -5,9 +5,7 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -44,8 +42,8 @@ class DialogVocabularyAdapter :
         fun onBind(position: Int) {
             val currentSection = getItem(position)
 
-            itemView.dialog.text = currentSection.name
-            itemView.translationDialog.text = currentSection.translated_name
+            itemView.dialog.text = currentSection.text
+            itemView.translationDialog.text = currentSection.translated_text
 
             var event = false
             var medPlr: MediaPlayer? = null

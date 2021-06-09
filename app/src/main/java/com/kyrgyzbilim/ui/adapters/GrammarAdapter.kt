@@ -1,7 +1,6 @@
 package com.kyrgyzbilim.ui.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,7 @@ class GrammarAdapter : ListAdapter<SubTopic, GrammarAdapter.SubTopicViewHolder>(
 
 //            itemView.grammarTitle.text = item?.text
 //            itemView.grammarTitleEn.text = item?.translated_text
-            itemView.textBody.text = currentSection?.name
+            itemView.textBody.text = currentSection?.text
         }
     }
 
