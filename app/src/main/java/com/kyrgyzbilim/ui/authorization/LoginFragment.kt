@@ -1,7 +1,9 @@
 package com.kyrgyzbilim.ui.authorization
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +56,7 @@ class LoginFragment : Fragment() {
                         Toast.makeText(activity, "success ",  Toast.LENGTH_SHORT).show()
                         startActivity(Intent(activity, MainActivity::class.java))
                         com.kyrgyzbilim.data.UserData.of(requireContext()).saveToken(it.data.access_token.toString())
+                        Log.e(TAG, it.data.access_token.toString() )
                         Thread{
                             Thread.sleep(500)
                             activity?.finish()

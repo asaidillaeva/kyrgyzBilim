@@ -53,13 +53,13 @@
             <TextView
                 android:id="@+id/course_description"
                 android:layout_width="253dp"
-                android:layout_height="85dp"
+                android:layout_height="90dp"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="11.5sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="14dp"
-                android:text="When an application component starts and the application does not have any other components running, the Android system and the application does not have any other components and the application does not have any other components"
+                android:layout_marginBottom="10dp"
+                android:text="A beginner of Kyrgyz (А1) can introduce him/herself, understand and use familiar everyday expressions and very basic phrases aimed at the satisfaction of needs in public places (shops, museums, etc). Can read and understand short, easy texts."
 
                 />
 

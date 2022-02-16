@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit
 interface ServiceClient {
 
     companion object {
-        private const val baseUtl = "http://159.89.29.83"
+//        private const val baseUtl = "http://164.90.234.21"
+        private const val baseUtl = "http://164.90.234.21"
 
         private fun getGson() = GsonBuilder().setLenient().create()
 
@@ -47,7 +48,7 @@ interface ServiceClient {
     suspend fun  login( @Body adv: LoginRequestBody): LoginResponse
 
     @Multipart
-    @POST("/v1/auth/register")
+    @POST("v1/auth/register")
     suspend fun  register(
         @Part("profile_picture") profile_picture: String,
         @Part("first_name") first_name: String,
@@ -69,7 +70,7 @@ interface ServiceClient {
     suspend fun getTopics(@Path("id") id: Int): List<Topic>
 
     @GET("/v1/topics/{id}")
-    suspend fun getSubTopics(@Path("id") id: Int): List<SubTopic>
+    suspend fun getSubTopics(@Header("Authorization") bearerToken: String, @Path("id") id: Int): List<SubTopic>
 
 
 

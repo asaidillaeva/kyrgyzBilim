@@ -91,7 +91,7 @@
                             android:id="@+id/progress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="UPPER-INTermediate"
+                            android:text="BEGINNER"
                             android:textAllCaps="true"
                             android:textColor="@color/white"
                             android:textSize="20sp"

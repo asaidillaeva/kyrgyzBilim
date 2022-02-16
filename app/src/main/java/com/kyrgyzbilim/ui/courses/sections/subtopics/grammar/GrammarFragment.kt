@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.data.UserData
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.adapters.GrammarAdapter
@@ -41,43 +42,51 @@ class GrammarFragment : Fragment() {
 
         var topicTranslatedName = "text"
         var topicName = "text"
-        arguments?.let {
-            val args = GrammarFragmentArgs.fromBundle(it)
-            val topicId = args.id
-            topicName = args.name
-            topicTranslatedName = args.translatedName
-            subTopicViewModel.setTopic(topicId)
-        }
 
-        grammarTitle?.text = topicName
-        if (topicTranslatedName.isNotEmpty()) {
-            grammarTitleEn?.text = "/$topicTranslatedName"
-        }
+        val token = UserData.of(requireContext()).getToken()
 
-        val layoutManager = LinearLayoutManager(activity)
-        val adapter = GrammarAdapter()
-        recyclerGrammar.layoutManager = layoutManager
-        recyclerGrammar.adapter = adapter
-        subTopicViewModel.subTopic.observe(viewLifecycleOwner, {
-            when (it) {
-                is ApiResult.Success -> {
-                    grammar_progress_bar.visibility = View.GONE
-                    recyclerGrammar.visibility = View.VISIBLE
-                    initList(it.data)
-                }
-                is ApiResult.Error -> {
-                    it.throwable.message.toString()
-                    grammar_progress_bar.visibility = View.GONE
-                    Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
-                }
-                is ApiResult.Loading -> {
-                    grammar_progress_bar.visibility = View.VISIBLE
-                }
-                else -> {
-                    grammar_progress_bar.visibility = View.VISIBLE
+        if (token != null || token != "") {
+            arguments?.let {
+                val args = GrammarFragmentArgs.fromBundle(it)
+                val topicId = args.id
+                topicName = args.name
+                topicTranslatedName = args.translatedName
+                subTopicViewModel.setTopic(topicId)
+                if (token != null) {
+                    subTopicViewModel.setToken(token)
                 }
             }
-        })
+
+            grammarTitle?.text = topicName
+            if (topicTranslatedName.isNotEmpty()) {
+                grammarTitleEn?.text = "/$topicTranslatedName"
+            }
+
+            val layoutManager = LinearLayoutManager(activity)
+            val adapter = GrammarAdapter()
+            recyclerGrammar.layoutManager = layoutManager
+            recyclerGrammar.adapter = adapter
+            subTopicViewModel.subTopic.observe(viewLifecycleOwner, {
+                when (it) {
+                    is ApiResult.Success -> {
+                        grammar_progress_bar.visibility = View.GONE
+                        recyclerGrammar.visibility = View.VISIBLE
+                        initList(it.data)
+                    }
+                    is ApiResult.Error -> {
+                        it.throwable.message.toString()
+                        grammar_progress_bar.visibility = View.GONE
+                        Toast.makeText(activity, "error", Toast.LENGTH_SHORT).show()
+                    }
+                    is ApiResult.Loading -> {
+                        grammar_progress_bar.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        grammar_progress_bar.visibility = View.VISIBLE
+                    }
+                }
+            })
+        }
     }
 
     private fun initList(data: List<SubTopic>) {

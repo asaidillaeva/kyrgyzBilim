@@ -8,8 +8,8 @@ import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 class SubTopicRepositoryImpl(
     private val serviceClient: ServiceClient
 ): SubTopicRepository {
-    override suspend fun getSubTopic(id: Int): ApiResult<List<SubTopic>> {
-        return apiCall { serviceClient.getSubTopics(id) }
+    override suspend fun getSubTopic(token: String?, id: Int): ApiResult<List<SubTopic>> {
+        return apiCall { serviceClient.getSubTopics(("Bearer $token"), id) }
 
     }
 }

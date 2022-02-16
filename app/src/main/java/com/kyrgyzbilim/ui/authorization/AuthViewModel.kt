@@ -9,6 +9,7 @@ import com.kyrgyzbilim.data.remote.user.repository.UserRepository
 class AuthViewModel(val userRepository: UserRepository) : ViewModel() {
     private lateinit var state: SavedStateHandle
     private lateinit var nameContainer: MutableLiveData<String>
+
     init {
         fun AuthViewModel(state: SavedStateHandle) {
             this.state = state

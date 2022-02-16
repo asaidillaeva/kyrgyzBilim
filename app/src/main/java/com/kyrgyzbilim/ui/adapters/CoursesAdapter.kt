@@ -38,7 +38,7 @@ class CoursesAdapter : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF
 
             itemView.level_title.text = course.name
             itemView.course_description.text = course.description
-            itemView.percent_progress.text = course.progress.toString()
+            itemView.percent_progress.text = course.progress.toString() + "%"
             itemView.level_progress_bar.setProgressCompat(course.progress, true)
 
             itemView.setOnClickListener {

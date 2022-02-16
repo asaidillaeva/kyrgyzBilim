@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.data.UserData
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.TextAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
@@ -40,17 +41,25 @@ class TextFragment : Fragment() {
 
         var topicTranslatedName = "text"
         var topicName = "text"
-        arguments?.let {
-            val args = TextFragmentArgs.fromBundle(it)
-            val topicId = args.id
-            topicName = args.name
-            topicTranslatedName = args.transletedName
-            subTopicViewModel.setTopic(topicId)
-        }
 
-        textTitle?.text = topicName
-        if (topicTranslatedName.isNotEmpty()){
-            textTitleEn?.text = "/$topicTranslatedName"
+        val token = UserData.of(requireContext()).getToken()
+
+        if (token != null || token != "") {
+            arguments?.let {
+                val args = TextFragmentArgs.fromBundle(it)
+                val topicId = args.id
+                topicName = args.name
+                topicTranslatedName = args.transletedName
+                subTopicViewModel.setTopic(topicId)
+                if (token != null) {
+                    subTopicViewModel.setToken(token)
+                }
+            }
+
+            textTitle?.text = topicName
+            if (topicTranslatedName.isNotEmpty()) {
+                textTitleEn?.text = "/$topicTranslatedName"
+            }
         }
 
 

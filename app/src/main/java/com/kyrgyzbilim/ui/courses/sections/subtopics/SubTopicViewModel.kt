@@ -11,14 +11,20 @@ class SubTopicViewModel(
 
     private var idTopic: Int = 0
 
-    fun setTopic(idSet: Int){
+    fun setTopic(idSet: Int) {
         idTopic = idSet
+    }
+
+    private var token: String? = null
+
+    fun setToken(tokenSet: String) {
+        token = tokenSet
     }
 
 
     val subTopic = liveData {
         emit(ApiResult.Loading)
-        val result = subTopicRepository.getSubTopic(idTopic)
+        val result = subTopicRepository.getSubTopic(token, idTopic)
         emit(result)
     }
 }

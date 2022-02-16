@@ -27,6 +27,7 @@ class SectionViewModel(
         emit(result)
     }
 
+
     val topics = liveData {
         emit(ApiResult.Loading)
         Log.e("section id in ve model", idSection.toString())
