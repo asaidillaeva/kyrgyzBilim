@@ -57,6 +57,7 @@ class VocabularyFragment : Fragment() {
             }
         }
 
+
         vocabularyTheme.text = topicName
         if (topicTranslatedName.isNotEmpty()) {
             vocabularyThemeEn.text = "/$topicTranslatedName"
