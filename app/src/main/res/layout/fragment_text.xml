@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:layout_marginTop="49dp"
+            android:layout_marginTop="60dp"
             tools:listitem="@layout/item_text" />
 
         <ProgressBar
