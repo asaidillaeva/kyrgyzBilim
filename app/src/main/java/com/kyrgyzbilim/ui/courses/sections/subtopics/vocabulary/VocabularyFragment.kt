@@ -26,7 +26,6 @@ class VocabularyFragment : Fragment() {
     private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +55,6 @@ class VocabularyFragment : Fragment() {
                 }
             }
         }
-
 
         vocabularyTheme.text = topicName
         if (topicTranslatedName.isNotEmpty()) {

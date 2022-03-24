@@ -49,7 +49,7 @@ class TextFragment : Fragment() {
                 val args = TextFragmentArgs.fromBundle(it)
                 val topicId = args.id
                 topicName = args.name
-                topicTranslatedName = args.transletedName
+                topicTranslatedName = args.translatedName
                 subTopicViewModel.setTopic(topicId)
                 if (token != null) {
                     subTopicViewModel.setToken(token)

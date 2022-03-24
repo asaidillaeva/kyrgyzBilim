@@ -21,7 +21,6 @@ import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_dialog.*
 
 class DialogFragment : Fragment() {
-
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }

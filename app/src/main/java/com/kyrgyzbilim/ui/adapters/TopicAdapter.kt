@@ -52,7 +52,7 @@ class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
                         SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
                     "Dialogs" ->
                         SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(currentTheme.id,currentTheme.name, currentTheme.translated_name)
-                    "Texts" ->
+                    "Text" ->
                         SectionsFragmentDirections.actionSectionsFragmentToTextFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
                     "Grammar" ->
                         SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(currentTheme.id, currentTheme.name, currentTheme.translated_name)

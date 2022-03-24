@@ -93,7 +93,7 @@
             app:argType="string"
             android:defaultValue="null" />
         <argument
-            android:name="transleted_name"
+            android:name="translated_name"
             app:argType="string"
             android:defaultValue="null" />
     </fragment>
