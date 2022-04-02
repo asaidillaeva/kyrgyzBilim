@@ -1,8 +1,10 @@
 package com.kyrgyzbilim.ui.courses.sections.subtopics.dialog
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.media.AudioManager
+import android.content.ContentValues.TAG
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.base.OnItemClickListener
 import com.kyrgyzbilim.data.UserData
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
@@ -21,11 +24,12 @@ import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_dialog.*
 
 class DialogFragment : Fragment() {
+
     private val subTopicViewModel: SubTopicViewModel by viewModels {
         InjectorObject.getSubTopicViewModelFactory()
     }
-    private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
 
+    private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +68,7 @@ class DialogFragment : Fragment() {
         }
 
 
-        subTopicViewModel.subTopic.observe(viewLifecycleOwner){
+        subTopicViewModel.subTopic.observe(viewLifecycleOwner) {
             when (it) {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
@@ -95,7 +99,5 @@ class DialogFragment : Fragment() {
         dialogVocabularyAdapter.setData(context)
 
     }
-
-
 
 }

@@ -1,9 +1,7 @@
 package com.kyrgyzbilim.base
 
-//interface OnItemClickListener {
-//    fun onItemClick(note: Note?)
-//}
+import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 
 interface OnItemClickListener {
-    fun <T> onItemClick(listItem: T)
+    fun onItemClick(listItem: SubTopic)
 }

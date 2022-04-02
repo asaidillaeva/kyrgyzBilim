@@ -57,21 +57,19 @@ class CoursesFragment : Fragment() {
             }
         }
 
-        user_name.setOnLongClickListener {
+        logout.setOnClickListener {
             UserData.of(requireContext()).saveToken("")
             startActivity(Intent(activity, AuthActivity::class.java))
             thread {
                 Thread.sleep(500)
                 activity?.finish()
             }
-
-            true
         }
 
         val token = UserData.of(requireContext()).getToken()
 
         if (token != null || token != "") {
-            courseViewModel.user(token!!).observe(viewLifecycleOwner){
+            courseViewModel.user(token!!).observe(viewLifecycleOwner) {
                 when (it) {
                     is ApiResult.Success -> {
                         user_name.text = "${it.data.first_name} ${it.data.last_name}"

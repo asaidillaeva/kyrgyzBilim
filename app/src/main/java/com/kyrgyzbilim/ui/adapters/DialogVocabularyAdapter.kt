@@ -5,6 +5,7 @@ import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kyrgyzbilim.R
+import com.kyrgyzbilim.base.OnItemClickListener
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import kotlinx.android.synthetic.main.item_dialog.view.*
+import java.lang.Exception
 
 class DialogVocabularyAdapter :
     ListAdapter<SubTopic, DialogVocabularyAdapter.SubTopicViewHolder>(DIFF) {
@@ -46,35 +49,43 @@ class DialogVocabularyAdapter :
             itemView.translationDialog.text = currentSection.translated_text
 
             var event = false
-            var medPlr: MediaPlayer? = null
-            itemView.setOnClickListener {
-                if (!currentSection.audio.isNullOrEmpty()) {
-                    event = true
-                    val myUri: Uri = Uri.parse(currentSection.audio)
-                    if (medPlr == null) {
-                        medPlr = MediaPlayer().apply {
-                            setAudioAttributes(
-                                AudioAttributes.Builder()
-                                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                                    .build()
-                            )
-                            context?.let { it1 -> setDataSource(it1, myUri) }
+            var mediaPlayer: MediaPlayer? = null
+            itemView.listenAudio.setOnClickListener {
+                try {
+                    if (!currentSection.audio.isNullOrEmpty()) {
+                        event = true
+                        val myUri: Uri = Uri.parse(currentSection.audio)
+                        if (mediaPlayer == null) {
+                            mediaPlayer = MediaPlayer().apply {
+                                setAudioAttributes(
+                                    AudioAttributes.Builder()
+                                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                                        .build()
+                                )
+                                context?.let { it1 -> setDataSource(it1, myUri) }
+                            }
+                            mediaPlayer?.prepare()
                         }
-                        medPlr?.prepare()
-                    }
-                    event = if (event) {
-                        medPlr?.start()
-                        medPlr?.setOnCompletionListener {
-                            event = true
+                        event = if (event) {
+                            mediaPlayer?.start()
+                            mediaPlayer?.setOnCompletionListener {
+                                event = true
+                            }
+                            false
+                        } else {
+                            mediaPlayer?.pause()
+                            mediaPlayer?.seekTo(0)
+                            true
                         }
-                        false
-                    } else {
-                        medPlr?.pause()
-                        medPlr?.seekTo(0)
-                        true
                     }
+                } catch (e: Exception) {
+                    Log.d(
+                        "Dialog Voc Adapter",
+                        "Most probably there is no file uploaded on the server"
+                    )
                 }
+
             }
         }
     }

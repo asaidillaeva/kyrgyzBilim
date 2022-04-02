@@ -7,8 +7,4 @@ data class SubTopic(
     val audio: String? = "",
     val image: String = " ",
     val type: String = ""
-) {
-    override fun toString(): String {
-        return "SubTopic(id=$id, icon='$image', audio='$audio', type='$type')"
-    }
-}
+)

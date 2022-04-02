@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
+import com.kyrgyzbilim.base.OnItemClickListener
 import com.kyrgyzbilim.data.UserData
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
@@ -24,7 +25,6 @@ class VocabularyFragment : Fragment() {
         InjectorObject.getSubTopicViewModelFactory()
     }
     private lateinit var dialogVocabularyAdapter: DialogVocabularyAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
