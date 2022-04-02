@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,12 +59,7 @@ class CoursesFragment : Fragment() {
         }
 
         logout.setOnClickListener {
-            UserData.of(requireContext()).saveToken("")
-            startActivity(Intent(activity, AuthActivity::class.java))
-            thread {
-                Thread.sleep(500)
-                activity?.finish()
-            }
+            openLogoutAlert()
         }
 
         val token = UserData.of(requireContext()).getToken()
@@ -82,6 +78,26 @@ class CoursesFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun openLogoutAlert() {
+        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
+        builder.setMessage(getString(R.string.logoutTitle))
+        builder.setNegativeButton(R.string.cancel, null)
+        builder.setPositiveButton(R.string.agreeLogout) { _, _ ->
+            logoutApp()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun logoutApp() {
+        UserData.of(requireContext()).saveToken("")
+        startActivity(Intent(activity, AuthActivity::class.java))
+        thread {
+            Thread.sleep(500)
+            activity?.finish()
         }
     }
 

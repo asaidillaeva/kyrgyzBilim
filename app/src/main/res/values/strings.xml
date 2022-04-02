@@ -14,4 +14,7 @@
     <string name="grammar_example">а, ы, о, у, ү, ө ,и ,э(е)</string>
     <string name="grammar_explanation">Кыска үндүүлөр:</string>
     <string name="dialog">Dialog</string>
+    <string name="logoutTitle">Вы уверены, что хотите выйти из аккаунта? \n \n</string>
+    <string name="cancel">Отмена</string>
+    <string name="agreeLogout">Выйти</string>
 </resources>
