@@ -6,5 +6,6 @@ data class SubTopic(
     val translated_text: String = "",
     val audio: String? = "",
     val image: String = " ",
-    val type: String = ""
+    val type: String = "",
+    val order: Int
 )

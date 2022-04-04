@@ -89,7 +89,8 @@ class VocabularyFragment : Fragment() {
         recyclerVocabulary.adapter = dialogVocabularyAdapter
         val layoutManager = LinearLayoutManager(activity)
         recyclerVocabulary.layoutManager = layoutManager
-        dialogVocabularyAdapter.submitList(data)
+        val filteredData = data.sortedBy { it.id }
+        dialogVocabularyAdapter.submitList(filteredData)
         dialogVocabularyAdapter.setData(context)
 
 

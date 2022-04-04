@@ -95,7 +95,8 @@ class DialogFragment : Fragment() {
         recyclerDialog.adapter = dialogVocabularyAdapter
         val layoutManager = LinearLayoutManager(activity)
         recyclerDialog.layoutManager = layoutManager
-        dialogVocabularyAdapter.submitList(data)
+        val filteredData = data.sortedBy { it.id }
+        dialogVocabularyAdapter.submitList(filteredData)
         dialogVocabularyAdapter.setData(context)
 
     }
