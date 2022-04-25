@@ -20,9 +20,9 @@ class CourseViewModel (
         }
     }
 
-    val course = liveData {
+    fun course(token: String) = liveData {
         emit(ApiResult.Loading)
-        val result = courseRepository.getCourseList()
+        val result = courseRepository.getCourseList(token)
         emit(result)
     }
 

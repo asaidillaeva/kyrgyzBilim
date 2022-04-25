@@ -40,31 +40,26 @@ class CoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        courseViewModel.course.observe(viewLifecycleOwner) {
-            when (it) {
-                is ApiResult.Success -> {
-                    progress_bar.visibility = View.GONE
-                    recyclerCourse.visibility = View.VISIBLE
-                    initList(it.data)
-                }
-                is ApiResult.Error -> {
-                    it.throwable.message.toString()
-                    Log.e("Course Error", it.throwable.message.toString())
-                }
-                is ApiResult.Loading -> {
-                    progress_bar.visibility = View.VISIBLE
-                    recyclerCourse.visibility = View.GONE
-                }
-            }
-        }
-
-        logout.setOnClickListener {
-            openLogoutAlert()
-        }
-
         val token = UserData.of(requireContext()).getToken()
 
         if (token != null || token != "") {
+            courseViewModel.course(token!!).observe(viewLifecycleOwner) {
+                when (it) {
+                    is ApiResult.Success -> {
+                        progress_bar.visibility = View.GONE
+                        recyclerCourse.visibility = View.VISIBLE
+                        initList(it.data)
+                    }
+                    is ApiResult.Error -> {
+                        it.throwable.message.toString()
+                        Log.e("Course Error", it.throwable.message.toString())
+                    }
+                    is ApiResult.Loading -> {
+                        progress_bar.visibility = View.VISIBLE
+                        recyclerCourse.visibility = View.GONE
+                    }
+                }
+            }
             courseViewModel.user(token!!).observe(viewLifecycleOwner) {
                 when (it) {
                     is ApiResult.Success -> {
@@ -79,6 +74,11 @@ class CoursesFragment : Fragment() {
                 }
             }
         }
+
+        logout.setOnClickListener {
+            openLogoutAlert()
+        }
+
     }
 
     private fun openLogoutAlert() {

@@ -15,6 +15,13 @@
         android:indeterminateTint="@color/purple_500"
         android:visibility="gone" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_group_50"
+        >
+    </RelativeLayout>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -110,15 +117,6 @@
 
                 </com.google.android.material.appbar.AppBarLayout>
 
-
-                <!--            <androidx.appcompat.widget.Toolbar-->
-                <!--                android:layout_width="match_parent"-->
-                <!--                android:layout_height="?attr/actionBarSize"-->
-                <!--                app:layout_collapseMode="parallax"-->
-                <!--                android:theme="@style/ToolbarTheme"-->
-                <!--                tools:ignore="UnknownIdInLayout">-->
-                <!--            </androidx.appcompat.widget.Toolbar>-->
-
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -132,11 +130,7 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/item_courses" />
 
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 
 </RelativeLayout>
 

@@ -61,7 +61,7 @@ interface ServiceClient {
     suspend fun  getUser(@Header("Authorization") bearerToken: String): User
 
     @GET("/v1/courses")
-    suspend fun  getCourses(): List<Course>
+    suspend fun  getCourses(@Header("Authorization") bearerToken: String): List<Course>
 
     @GET("/v1/courses/{id}/sections")
     suspend fun  getSection(@Path("id") id: Int): List<Section>

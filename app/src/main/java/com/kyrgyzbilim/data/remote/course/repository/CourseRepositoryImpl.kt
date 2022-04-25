@@ -8,8 +8,8 @@ import com.kyrgyzbilim.data.remote.ServiceClient
 class CourseRepositoryImpl (
     private val serviceClient: ServiceClient
 ) : CourseRepository {
-    override suspend fun getCourseList(): ApiResult<List<Course>> {
-        return apiCall { serviceClient.getCourses() }
+    override suspend fun getCourseList(token: String): ApiResult<List<Course>> {
+        return apiCall { serviceClient.getCourses("Bearer $token") }
     }
 
 
