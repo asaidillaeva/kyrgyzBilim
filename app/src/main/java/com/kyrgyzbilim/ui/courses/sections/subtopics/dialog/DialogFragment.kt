@@ -2,6 +2,7 @@ package com.kyrgyzbilim.ui.courses.sections.subtopics.dialog
 
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
@@ -10,9 +11,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kyrgyzbilim.MainActivity
 import com.kyrgyzbilim.R
 import com.kyrgyzbilim.base.ApiResult
 import com.kyrgyzbilim.base.InjectorObject
@@ -22,6 +25,7 @@ import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.ui.adapters.DialogVocabularyAdapter
 import com.kyrgyzbilim.ui.courses.sections.subtopics.SubTopicViewModel
 import kotlinx.android.synthetic.main.fragment_dialog.*
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class DialogFragment : Fragment() {
 
@@ -65,6 +69,22 @@ class DialogFragment : Fragment() {
         dialogTitle.text = topicName
         if (topicTranslatedName.isNotEmpty()) {
             dialogTitleEn.text = "/$topicTranslatedName"
+        }
+
+        subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    Log.e("trackProgress Success", it.data.toString())
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("trackProgress Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    Log.e("trackProgress"," is loading")
+
+                }
+            }
         }
 
 
