@@ -49,12 +49,12 @@ class CoursesFragment : Fragment() {
                         progress_bar.visibility = View.GONE
                         recyclerCourse.visibility = View.VISIBLE
                         initList(it.data)
-                        Log.e("Course Success", it.data.toString())
+                        Log.d("Course Success", it.data.toString())
 
                     }
                     is ApiResult.Error -> {
                         it.throwable.message.toString()
-                        Log.e("Course Error", it.throwable.message.toString())
+                        Log.d("Course Error", it.throwable.message.toString())
                     }
                     is ApiResult.Loading -> {
                         progress_bar.visibility = View.VISIBLE

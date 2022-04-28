@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
                         login_progress_bar.visibility = View.GONE
                         startActivity(Intent(activity, MainActivity::class.java))
                         com.kyrgyzbilim.data.UserData.of(requireContext()).saveToken(it.data.access_token.toString())
-                        Log.e(TAG, it.data.access_token.toString() )
+                        Log.d(TAG, it.data.access_token.toString() )
                         Thread{
                             Thread.sleep(500)
                             activity?.finish()

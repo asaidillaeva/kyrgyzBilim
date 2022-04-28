@@ -73,14 +73,14 @@ class GrammarFragment : Fragment() {
             subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
                 when (it) {
                     is ApiResult.Success -> {
-                        Log.e("trackProgress Success", it.data.toString())
+                        Log.d("trackProgress Success", it.data.toString())
                     }
                     is ApiResult.Error -> {
                         it.throwable.message.toString()
-                        Log.e("trackProgress Error", it.throwable.message.toString())
+                        Log.d("trackProgress Error", it.throwable.message.toString())
                     }
                     is ApiResult.Loading -> {
-                        Log.e("trackProgress"," is loading")
+                        Log.d("trackProgress"," is loading")
 
                     }
                 }

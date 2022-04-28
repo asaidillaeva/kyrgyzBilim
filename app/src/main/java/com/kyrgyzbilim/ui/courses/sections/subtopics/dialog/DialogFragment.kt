@@ -76,14 +76,14 @@ class DialogFragment : Fragment() {
         subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
             when (it) {
                 is ApiResult.Success -> {
-                    Log.e("trackProgress Success", it.data.toString())
+                    Log.d("trackProgress Success", it.data.toString())
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
-                    Log.e("trackProgress Error", it.throwable.message.toString())
+                    Log.d("trackProgress Error", it.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
-                    Log.e("trackProgress"," is loading")
+                    Log.d("trackProgress"," is loading")
 
                 }
             }
@@ -95,12 +95,12 @@ class DialogFragment : Fragment() {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
                     recyclerDialog.visibility = View.VISIBLE
-                    Log.e("Topic Success", it.data.toString())
+                    Log.d("Topic Success", it.data.toString())
                     initList(it.data)
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
-                    Log.e("Topic Error", it.throwable.message.toString())
+                    Log.d("Topic Error", it.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE

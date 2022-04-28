@@ -66,14 +66,14 @@ class VocabularyFragment : Fragment() {
         subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
             when (it) {
                 is ApiResult.Success -> {
-                    Log.e("trackProgress Success", it.data.toString())
+                    Log.d("trackProgress Success", it.data.toString())
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
-                    Log.e("trackProgress Error", it.throwable.message.toString())
+                    Log.d("trackProgress Error", it.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
-                    Log.e("trackProgress"," is loading")
+                    Log.d("trackProgress"," is loading")
 
                 }
             }
@@ -84,12 +84,12 @@ class VocabularyFragment : Fragment() {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
                     recyclerVocabulary.visibility = View.VISIBLE
-                    Log.e("Section Success", it.data.toString())
+                    Log.d("Section Success", it.data.toString())
                     initList(it.data)
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
-                    Log.e("Section Error", it.throwable.message.toString())
+                    Log.d("Section Error", it.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE

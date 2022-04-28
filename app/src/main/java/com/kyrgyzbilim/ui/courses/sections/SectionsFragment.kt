@@ -45,13 +45,13 @@ class SectionsFragment : Fragment() {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
                     recyclerSection.visibility = View.VISIBLE
-                    Log.e("Section Success", that.data.toString())
+                    Log.d("Section Success", that.data.toString())
 
                     initList(that.data, courseId)
                 }
                 is ApiResult.Error -> {
                     that.throwable.message.toString()
-                    Log.e("Section Error", that.throwable.message.toString())
+                    Log.d("Section Error", that.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE
