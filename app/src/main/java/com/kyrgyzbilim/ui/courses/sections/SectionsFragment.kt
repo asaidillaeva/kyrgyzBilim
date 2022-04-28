@@ -32,15 +32,14 @@ class SectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         arguments?.let {
             val courseId = SectionsFragmentArgs.fromBundle(it).sectionId
             sectionViewModel.setCourseId(courseId)
+            getSection(courseId)
         }
-        getSection()
     }
 
-    private fun getSection() {
+    private fun getSection(courseId: Int) {
         sectionViewModel.section.observe(viewLifecycleOwner) { that ->
             when (that) {
                 is ApiResult.Success -> {
@@ -48,7 +47,7 @@ class SectionsFragment : Fragment() {
                     recyclerSection.visibility = View.VISIBLE
                     Log.e("Section Success", that.data.toString())
 
-                    initList(that.data)
+                    initList(that.data, courseId)
                 }
                 is ApiResult.Error -> {
                     that.throwable.message.toString()
@@ -63,8 +62,8 @@ class SectionsFragment : Fragment() {
     }
 
 
-    private fun initList(sections: List<Section>?) {
-        sectionAdapter = SectionAdapter(sections)
+    private fun initList(sections: List<Section>?, courseId: Int) {
+        sectionAdapter = SectionAdapter(sections, courseId)
         recyclerSection.adapter = sectionAdapter
         sectionAdapter.submitList(sections)
 

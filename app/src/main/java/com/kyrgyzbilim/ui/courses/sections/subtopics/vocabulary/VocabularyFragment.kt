@@ -48,6 +48,8 @@ class VocabularyFragment : Fragment() {
                 val args = VocabularyFragmentArgs.fromBundle(it)
                 val topicId = args.id
                 topicName = args.name
+                val courseId = args.courseId
+                subTopicViewModel.setCourseId(courseId)
                 topicTranslatedName = args.translatedName
                 subTopicViewModel.setTopic(topicId)
                 if (token != null) {
@@ -61,6 +63,21 @@ class VocabularyFragment : Fragment() {
             vocabularyThemeEn.text = "/$topicTranslatedName"
         }
 
+        subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    Log.e("trackProgress Success", it.data.toString())
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("trackProgress Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    Log.e("trackProgress"," is loading")
+
+                }
+            }
+        }
 
         subTopicViewModel.subTopic.observe(viewLifecycleOwner) {
             when (it) {

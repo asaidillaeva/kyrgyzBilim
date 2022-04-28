@@ -32,7 +32,7 @@ class CoursesAdapter : ListAdapter<Course, CoursesAdapter.CourseViewHolder>(DIFF
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        @SuppressLint("ResourceAsColor")
+        @SuppressLint("ResourceAsColor", "SetTextI18n")
         fun onBind(position: Int) {
             val course = getItem(position)
 

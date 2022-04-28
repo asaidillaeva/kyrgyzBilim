@@ -3,6 +3,7 @@ package com.kyrgyzbilim.data.remote
 import com.google.gson.GsonBuilder
 import com.kyrgyzbilim.data.remote.course.Course
 import com.kyrgyzbilim.data.remote.sections.Section
+import com.kyrgyzbilim.data.remote.subTopic.CourseIdObj
 import com.kyrgyzbilim.data.remote.subTopic.SubTopic
 import com.kyrgyzbilim.data.remote.subTopic.TrackProgressResponse
 import com.kyrgyzbilim.data.remote.topic.Topic
@@ -49,7 +50,7 @@ interface ServiceClient {
     suspend fun login(@Body adv: LoginRequestBody): LoginResponse
 
     @POST("/v1/subtopics/{id}/count-progress")
-    suspend fun trackProgress(@Body courseId: Int): TrackProgressResponse
+    suspend fun trackProgress(@Header("Authorization") bearerToken: String, @Body courseId: CourseIdObj, @Path("id") id: Int): TrackProgressResponse
 
     @Multipart
     @POST("v1/auth/register")

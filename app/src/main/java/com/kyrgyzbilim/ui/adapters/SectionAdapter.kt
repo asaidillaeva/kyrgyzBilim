@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,8 @@ import com.kyrgyzbilim.data.remote.sections.Section
 import kotlinx.android.synthetic.main.item_sections.view.*
 
 class SectionAdapter(
-    private var sectionList: List<Section>?
+    private var sectionList: List<Section>?,
+    private var courseId: Int
 ) : ListAdapter<Section, SectionAdapter.SectionViewHolder>(DIFF) {
 
     private lateinit var context: Context
@@ -54,7 +54,7 @@ class SectionAdapter(
                     .into(itemView.section_image)
 
             itemView.section_item_card.setOnClickListener {
-                themesAdapter.setData(sectionList?.get(position)?.topics, sectionList?.get(position)?.type)
+                themesAdapter.setData(courseId, sectionList?.get(position)?.topics, sectionList?.get(position)?.type)
                 themesRV?.adapter = themesAdapter
                 themesAdapter.submitList(sectionList?.get(position)?.topics)
 

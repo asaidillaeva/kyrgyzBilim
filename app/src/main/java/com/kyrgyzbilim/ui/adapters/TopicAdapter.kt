@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.item_themes.view.*
 
 
 class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
-    private  var items: List<Topic>? = null
-    private  var sectionType: String? = null
+    private var items: List<Topic>? = null
+    private var sectionType: String? = null
+    private var courseId: Int = -1
 
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Topic>() {
@@ -33,11 +34,13 @@ class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
     }
 
     fun setData(
+        courseId: Int,
         items: List<Topic>?,
         sectionType: String?
     ) {
-            this.items = items
-            this.sectionType = sectionType
+        this.items = items
+        this.sectionType = sectionType
+        this.courseId = courseId
     }
 
     inner class ThemeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -49,13 +52,33 @@ class TopicAdapter : ListAdapter<Topic, TopicAdapter.ThemeViewHolder>(DIFF) {
             itemView.themeRV_item.setOnClickListener {
                 val action = when (sectionType) {
                     "Vocabulary" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
+                        SectionsFragmentDirections.actionSectionsFragmentToVocabularyFragment(
+                            currentTheme.id,
+                            courseId,
+                            currentTheme.name,
+                            currentTheme.translated_name
+                        )
                     "Dialogs" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(currentTheme.id,currentTheme.name, currentTheme.translated_name)
+                        SectionsFragmentDirections.actionSectionsFragmentToDialogFragmentK(
+                            currentTheme.id,
+                            courseId,
+                            currentTheme.name,
+                            currentTheme.translated_name
+                        )
                     "Text" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToTextFragment(currentTheme.id,currentTheme.name, currentTheme.translated_name)
+                        SectionsFragmentDirections.actionSectionsFragmentToTextFragment(
+                            currentTheme.id,
+                            courseId,
+                            currentTheme.name,
+                            currentTheme.translated_name
+                        )
                     "Grammar" ->
-                        SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(currentTheme.id, currentTheme.name, currentTheme.translated_name)
+                        SectionsFragmentDirections.actionSectionsFragmentToGrammarFragment(
+                            currentTheme.id,
+                            courseId,
+                            currentTheme.name,
+                            currentTheme.translated_name
+                        )
                     else -> SectionsFragmentDirections.actionSectionsFragmentToErrorFragment()
 
                 }

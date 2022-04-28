@@ -57,6 +57,8 @@ class DialogFragment : Fragment() {
             arguments?.let {
                 val args = DialogFragmentArgs.fromBundle(it)
                 val topicId = args.id
+                val courseId = args.courseId
+                subTopicViewModel.setCourseId(courseId)
                 topicName = args.name
                 topicTranslatedName = args.translatedName
                 subTopicViewModel.setTopic(topicId)
@@ -93,12 +95,12 @@ class DialogFragment : Fragment() {
                 is ApiResult.Success -> {
                     progress_bar.visibility = View.GONE
                     recyclerDialog.visibility = View.VISIBLE
-                    Log.e("Section Success", it.data.toString())
+                    Log.e("Topic Success", it.data.toString())
                     initList(it.data)
                 }
                 is ApiResult.Error -> {
                     it.throwable.message.toString()
-                    Log.e("Section Error", it.throwable.message.toString())
+                    Log.e("Topic Error", it.throwable.message.toString())
                 }
                 is ApiResult.Loading -> {
                     progress_bar.visibility = View.VISIBLE

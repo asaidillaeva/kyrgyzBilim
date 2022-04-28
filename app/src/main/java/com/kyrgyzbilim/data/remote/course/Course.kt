@@ -3,7 +3,7 @@ package com.kyrgyzbilim.data.remote.course
 import android.os.Parcel
 import android.os.Parcelable
 
-class Course (
+data class Course (
     val id: Int,
     val name: String?,
     val description: String?,

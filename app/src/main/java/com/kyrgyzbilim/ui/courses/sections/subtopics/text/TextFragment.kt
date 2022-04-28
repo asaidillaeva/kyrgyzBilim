@@ -2,6 +2,7 @@ package com.kyrgyzbilim.ui.courses.sections.subtopics.text
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,8 @@ class TextFragment : Fragment() {
                 val args = TextFragmentArgs.fromBundle(it)
                 val topicId = args.id
                 topicName = args.name
+                val courseId = args.courseId
+                subTopicViewModel.setCourseId(courseId)
                 topicTranslatedName = args.translatedName
                 subTopicViewModel.setTopic(topicId)
                 if (token != null) {
@@ -67,6 +70,23 @@ class TextFragment : Fragment() {
         val adapter = TextAdapter()
         recyclerText.layoutManager = layoutManager
         recyclerText.adapter = adapter
+
+        subTopicViewModel.trackProgress().observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Success -> {
+                    Log.e("trackProgress Success", it.data.toString())
+                }
+                is ApiResult.Error -> {
+                    it.throwable.message.toString()
+                    Log.e("trackProgress Error", it.throwable.message.toString())
+                }
+                is ApiResult.Loading -> {
+                    Log.e("trackProgress"," is loading")
+
+                }
+            }
+        }
+
         subTopicViewModel.subTopic.observe(viewLifecycleOwner, {
             when (it) {
                 is ApiResult.Success -> {
